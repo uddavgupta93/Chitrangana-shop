@@ -10,8 +10,9 @@
             --amama-gray: #666666;
             --amama-border: #E8E8E8;
             --amama-bg: #FFFFFF;
-            --gold-accent: #C5A059;
+            --gold-accent: #BFA37A;
             --soft-bg: #FAFAFA;
+            --whatsapp-green: #25D366;
         }
 
         * {
@@ -40,7 +41,7 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* LUXURY UTILITY HEADER WITH AMAMA GRAPHICS */
+        /* UTILITY HEADER */
         .main-header {
             display: flex;
             justify-content: space-between;
@@ -55,7 +56,6 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            cursor: pointer;
         }
 
         .menu-toggle {
@@ -103,457 +103,194 @@
         }
         .header-icon:hover { color: var(--gold-accent); }
 
-        /* FLOATING WHATSAPP ICON UP TOP */
-        .floating-wa-top {
+        /* INTERACTIVE SEARCH BAR OVERLAY */
+        .search-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: white;
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            z-index: 10;
+        }
+        .search-overlay input {
+            width: 85%;
+            border: none;
+            outline: none;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            color: var(--amama-dark);
+        }
+        .close-search {
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* FLOATING WHATSAPP ICON */
+        .floating-wa-btn {
             position: fixed;
-            top: 50px;
-            right: 20px;
-            background-color: #25D366;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--whatsapp-green);
             color: white;
-            width: 45px;
-            height: 45px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 1.5rem;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             z-index: 1001;
             text-decoration: none;
+            transition: transform 0.3s ease;
         }
+        .floating-wa-btn:hover { transform: scale(1.08); }
+        .floating-wa-btn svg { width: 32px; height: 32px; fill: white; }
 
-        /* SLIDE SIDE NAVIGATION MENU */
+        /* SIDE DRAWER MENU */
         .side-nav {
             position: fixed;
-            top: 0;
-            left: -300px;
-            width: 300px;
-            height: 100%;
-            background: white;
-            z-index: 1002;
-            box-shadow: 5px 0 25px rgba(0,0,0,0.1);
-            transition: left 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            top: 0; left: -300px; width: 300px; height: 100%;
+            background: white; z-index: 1002;
+            box-shadow: 5px 0 25px rgba(0,0,0,0.05);
+            transition: left 0.4s ease;
             padding: 40px 30px;
         }
         .side-nav.open { left: 0; }
-
-        .close-nav {
-            font-size: 1.8rem;
-            cursor: pointer;
-            text-align: right;
-            margin-bottom: 35px;
-        }
-
-        .side-nav-links {
-            list-style: none;
-        }
-
-        .side-nav-links li {
-            margin-bottom: 22px;
-        }
-
+        .close-nav { font-size: 1.8rem; cursor: pointer; text-align: right; margin-bottom: 35px; }
+        .side-nav-links { list-style: none; }
+        .side-nav-links li { margin-bottom: 22px; }
         .side-nav-links a {
-            text-decoration: none;
-            color: var(--amama-dark);
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            transition: color 0.3s;
+            text-decoration: none; color: var(--amama-dark);
+            font-family: 'Montserrat', sans-serif; font-size: 0.85rem;
+            letter-spacing: 2px; text-transform: uppercase;
         }
-        .side-nav-links a:hover { color: var(--gold-accent); }
 
         .nav-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.2);
-            z-index: 1001;
-            display: none;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.1); z-index: 1001; display: none;
         }
 
-        /* HERO RECENT PRODUCT DISPLAY SLIDER */
-        .slider-container {
-            max-width: 1200px;
-            margin: 25px auto;
-            padding: 0 20px;
-            position: relative;
-        }
-
-        .slider-wrapper {
-            width: 100%;
-            height: 420px;
-            overflow: hidden;
-            position: relative;
-            background-color: var(--soft-bg);
-        }
-
-        @media(max-width: 768px) { .slider-wrapper { height: 260px; } }
-
-        .slide-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            position: absolute;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-
+        /* AUTOPLAY RECENT SLIDER */
+        .slider-container { max-width: 1200px; margin: 25px auto; padding: 0 20px; }
+        .slider-wrapper { width: 100%; height: 380px; overflow: hidden; position: relative; background-color: var(--soft-bg); }
+        @media(max-width: 768px) { .slider-wrapper { height: 240px; } }
+        .slide-img { width: 100%; height: 100%; object-fit: cover; position: absolute; opacity: 0; transition: opacity 1s ease-in-out; }
         .slide-img.active { opacity: 1; }
-
         .slider-title-overlay {
-            position: absolute;
-            bottom: 30px;
-            left: 30px;
-            color: white;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.4);
-            font-family: 'Montserrat', sans-serif;
-            letter-spacing: 1.5px;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            background: rgba(0,0,0,0.2);
-            padding: 5px 12px;
+            position: absolute; bottom: 20px; left: 20px; color: white;
+            font-family: 'Montserrat', sans-serif; letter-spacing: 1.5px; font-size: 0.75rem;
+            text-transform: uppercase; background: rgba(0,0,0,0.3); padding: 6px 14px;
         }
 
-        /* MAIN HOME LAYOUT SECTIONS */
-        .section-wrapper {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
-        }
+        /* PRODUCT EDITORIAL SECTIONS */
+        .section-wrapper { max-width: 1200px; margin: 60px auto; padding: 0 20px; }
+        .section-header { text-align: center; margin-bottom: 35px; }
+        .section-header h2 { font-size: 1.5rem; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: var(--amama-dark); }
+        .section-header::after { content: ''; display: block; width: 35px; height: 1px; background-color: var(--gold-accent); margin: 12px auto 0 auto; }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 35px;
-        }
+        .editorial-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        @media (min-width: 768px) { .editorial-grid { grid-template-columns: repeat(4, 1fr); gap: 30px; } }
 
-        .section-header h2 {
-            font-size: 1.6rem;
-            font-weight: 400;
-            letter-spacing: 4px;
-            text-transform: uppercase;
-            color: var(--amama-dark);
-            margin-bottom: 5px;
-        }
-
-        .section-header::after {
-            content: '';
-            display: block;
-            width: 40px;
-            height: 1px;
-            background-color: var(--gold-accent);
-            margin: 12px auto 0 auto;
-        }
-
-        /* 4-COLUMN PROFESSIONAL PRODUCT GRID */
-        .editorial-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        @media (min-width: 768px) {
-            .editorial-grid { grid-template-columns: repeat(4, 1fr); gap: 30px; }
-        }
-
-        /* AMAMA CARD ARCHITECTURE */
-        .luxury-card {
-            background: white;
-            display: flex;
-            flex-direction: column;
-            cursor: pointer;
-        }
-
-        .card-img-holder {
-            position: relative;
-            width: 100%;
-            padding-top: 130%;
-            background-color: var(--soft-bg);
-            overflow: hidden;
-        }
-
-        .card-img-holder img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .luxury-card:hover .card-img-holder img {
-            transform: scale(1.03);
-        }
-
-        .card-details {
-            padding: 12px 5px;
-            text-align: center;
-        }
-
-        .card-title {
-            font-size: 0.9rem;
-            font-weight: 400;
-            letter-spacing: 0.5px;
-            color: var(--amama-dark);
-            margin-bottom: 5px;
-            text-transform: capitalize;
-        }
-
-        .card-price {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            color: var(--amama-gray);
-        }
+        /* CARD DESIGN */
+        .luxury-card { background: white; display: flex; flex-direction: column; cursor: pointer; }
+        .card-img-holder { position: relative; width: 100%; padding-top: 130%; background-color: var(--soft-bg); overflow: hidden; }
+        .card-img-holder img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .luxury-card:hover .card-img-holder img { transform: scale(1.02); }
+        .card-details { padding: 12px 5px; text-align: center; }
+        .card-title { font-size: 0.9rem; font-weight: 400; letter-spacing: 0.5px; color: var(--amama-dark); margin-bottom: 5px; text-transform: capitalize; }
+        .card-price { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--amama-gray); }
 
         .view-all-btn {
-            display: block;
-            width: fit-content;
-            margin: 25px auto 0 auto;
-            background: none;
-            border: none;
-            border-bottom: 1px solid var(--amama-dark);
-            color: var(--amama-dark);
-            padding-bottom: 3px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: color 0.3s;
+            display: block; width: fit-content; margin: 25px auto 0 auto; background: none; border: none;
+            border-bottom: 1px solid var(--amama-dark); color: var(--amama-dark); padding-bottom: 3px;
+            font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
         }
-        .view-all-btn:hover { color: var(--gold-accent); border-color: var(--gold-accent); }
 
-        /* VIDEO CONTENT SECTION (SHOTS OF PRODUCTS) */
-        .video-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-        }
+        /* SHOTS OF PRODUCTS (VIDEO) */
+        .video-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
         @media (min-width: 768px) { .video-container { grid-template-columns: repeat(4, 1fr); gap: 25px; } }
+        .video-box { position: relative; width: 100%; padding-top: 170%; background: #000; }
+        .video-box video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
 
-        .video-box {
-            position: relative;
-            width: 100%;
-            padding-top: 170%; /* Vertical Shorts Ratio */
-            background: #000;
-        }
-
-        .video-box iframe, .video-box video {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border: none;
-            object-fit: cover;
-        }
-
-        /* BRAND STATEMENT & CORE TRUST BADGES */
-        .brand-statement {
-            background-color: var(--soft-bg);
-            text-align: center;
-            padding: 60px 20px;
-            border-top: 1px solid var(--amama-border);
-            border-bottom: 1px solid var(--amama-border);
-            margin-top: 80px;
-        }
-
-        .brand-statement h3 {
-            font-size: 1.8rem;
-            font-weight: 400;
-            margin-bottom: 15px;
-            letter-spacing: 2px;
-        }
-
-        .brand-statement p {
-            font-size: 1rem;
-            max-width: 600px;
-            margin: 0 auto 40px auto;
-            color: #444;
-            line-height: 1.7;
-        }
-
-        .badges-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+        /* BRAND STATEMENT & TRUST BADGES */
+        .brand-statement { background-color: var(--soft-bg); text-align: center; padding: 60px 20px; border-top: 1px solid var(--amama-border); border-bottom: 1px solid var(--amama-border); margin-top: 80px; }
+        .brand-statement h3 { font-size: 1.8rem; font-weight: 400; margin-bottom: 15px; letter-spacing: 2px; }
+        .brand-statement p { font-size: 1rem; max-width: 600px; margin: 0 auto 40px auto; color: #444; line-height: 1.7; }
+        
+        .badges-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1000px; margin: 0 auto; }
         @media(min-width: 768px) { .badges-grid { grid-template-columns: repeat(4, 1fr); } }
+        .badge-item { text-align: center; }
+        .badge-icon { font-size: 1.5rem; color: var(--gold-accent); margin-bottom: 10px; }
+        .badge-title { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--amama-dark); }
 
-        .badge-item {
-            text-align: center;
-        }
-
-        .badge-icon {
-            font-size: 1.6rem;
-            color: var(--gold-accent);
-            margin-bottom: 10px;
-        }
-
-        .badge-title {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--amama-dark);
-            font-weight: 500;
-        }
-
-        /* MASTER DETAIL PAGE POPUP OVERLAY */
-        .detail-popup {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(255, 255, 255, 0.98);
-            z-index: 2000;
-            display: none;
-            overflow-y: auto;
-            padding: 40px 20px;
-        }
-
-        .detail-content {
-            max-width: 900px;
-            margin: 40px auto;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-            position: relative;
-        }
+        /* MULTI IMAGE POPUP OVERLAY SLIDER */
+        .detail-popup { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.99); z-index: 2000; display: none; overflow-y: auto; padding: 40px 20px; }
+        .detail-content { max-width: 900px; margin: 40px auto; display: grid; grid-template-columns: 1fr; gap: 40px; position: relative; }
         @media(min-width: 768px) { .detail-content { grid-template-columns: 1fr 1fr; align-items: center; } }
+        .popup-close { position: absolute; top: -20px; right: 10px; font-size: 2rem; cursor: pointer; z-index: 10; }
+        
+        .popup-gallery-wrap { position: relative; width: 100%; }
+        .popup-img-container { width: 100%; padding-top: 120%; position: relative; background-color: var(--soft-bg); overflow: hidden; }
+        .popup-img-container img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: none; }
+        .popup-img-container img.active { display: block; }
+        
+        .popup-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.7); border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 1rem; cursor: pointer; display: none; }
+        .popup-arrow.prev { left: 10px; }
+        .popup-arrow.next { right: 10px; }
+        .popup-dots { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
+        .popup-dot { width: 7px; height: 7px; background: #ddd; border-radius: 50%; cursor: pointer; }
+        .popup-dot.active { background: var(--amama-dark); }
 
-        .popup-close {
-            position: absolute;
-            top: -20px; right: 10px;
-            font-size: 2rem;
-            cursor: pointer;
-            color: var(--amama-dark);
-        }
+        .popup-info-wrap { text-align: left; padding: 0 10px; }
+        .popup-title { font-size: 1.5rem; font-weight: 400; margin-bottom: 12px; }
+        .popup-price { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: var(--gold-accent); margin-bottom: 20px; }
+        .popup-desc { font-size: 0.9rem; color: var(--amama-gray); line-height: 1.6; margin-bottom: 25px; }
+        
+        /* ORDER FORM MODULE */
+        .order-form-container { background-color: var(--soft-bg); padding: 20px; border: 1px solid var(--amama-border); margin-top: 15px; display: none; }
+        .order-form-container h4 { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; color: var(--amama-dark); }
+        .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 0.75rem; font-family: 'Montserrat', sans-serif; text-transform: uppercase; margin-bottom: 5px; color: var(--amama-gray); }
+        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid var(--amama-border); font-size: 0.9rem; outline: none; }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--amama-dark); }
+        
+        .open-form-btn { display: block; width: 100%; background-color: var(--amama-dark); color: white; text-align: center; padding: 16px; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border: none; }
+        .submit-order-btn { display: block; width: 100%; background-color: var(--whatsapp-green); color: white; text-align: center; padding: 14px; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border: none; font-weight: 500; }
 
-        .popup-img-wrap {
-            width: 100%;
-            padding-top: 120%;
-            position: relative;
-            background-color: var(--soft-bg);
-        }
-
-        .popup-img-wrap img {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;
-        }
-
-        .popup-info-wrap {
-            text-align: left;
-            padding: 0 10px;
-        }
-
-        .popup-title {
-            font-size: 1.6rem;
-            font-weight: 400;
-            margin-bottom: 12px;
-            color: var(--amama-dark);
-        }
-
-        .popup-price {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1.2rem;
-            color: var(--gold-accent);
-            margin-bottom: 20px;
-            font-weight: 500;
-        }
-
-        .popup-desc {
-            font-family: sans-serif;
-            font-size: 0.9rem;
-            color: var(--amama-gray);
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        .popup-order-btn {
-            display: block;
-            width: 100%;
-            background-color: var(--amama-dark);
-            color: white;
-            text-align: center;
-            padding: 16px;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            transition: opacity 0.3s;
-        }
-        .popup-order-btn:hover { opacity: 0.9; }
-
-        /* COMPREHENSIVE FOOTER DESIGN */
-        footer {
-            background-color: #FFFFFF;
-            padding: 60px 25px;
-            border-top: 1px solid var(--amama-border);
-            text-align: center;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 40px;
-            max-width: 1000px;
-            margin: 0 auto 50px auto;
-        }
+        /* FOOTER */
+        footer { background-color: #FFFFFF; padding: 60px 25px; border-top: 1px solid var(--amama-border); text-align: center; }
+        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 40px; max-width: 1000px; margin: 0 auto 50px auto; }
         @media(min-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; text-align: left; } }
-
-        .footer-col h4 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 18px;
-            color: var(--amama-dark);
-        }
-
-        .footer-col p, .footer-col a {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
-            color: var(--amama-gray);
-            line-height: 1.8;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 8px;
-        }
-        .footer-col a:hover { color: var(--gold-accent); }
-
-        footer .copyright {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.7rem;
-            color: #999;
-            letter-spacing: 1px;
-            margin-top: 30px;
-            text-transform: uppercase;
-        }
+        .footer-col h4 { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 18px; }
+        .footer-col p, .footer-col a { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: var(--amama-gray); line-height: 1.8; text-decoration: none; display: block; margin-bottom: 8px; }
+        footer .copyright { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; color: #999; letter-spacing: 1px; text-transform: uppercase; margin-top: 30px; }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="top-bar">The Curated Statement Edit • Worldwide Authenticity</div>
-
-    <a href="https://wa.me/8801850341190" target="_blank" class="floating-wa-top" title="Direct WhatsApp">✉</a>
+    
+    <a href="https://wa.me/8801850341190" target="_blank" class="floating-wa-btn" title="Chat with us">
+        <svg viewBox="0 0 32 32"><path d="M16 2a13.93 13.93 0 0 0-13.93 13.93c0 2.43.62 4.8 1.8 6.93L2 29.8l7.15-1.87a13.84 13.84 0 0 0 6.85 1.8A13.93 13.93 0 0 0 30 15.93 13.93 13.93 0 0 0 16 2zm0 25.54a11.53 11.53 0 0 1-5.87-1.6l-.42-.25-4.37 1.14 1.17-4.25-.28-.45a11.57 11.57 0 0 1-1.77-6.18A11.55 11.55 0 0 1 16 4.46a11.55 11.55 0 0 1 11.54 11.54A11.57 11.57 0 0 1 16 27.54zm6.33-8.66c-.35-.17-2.05-1-2.37-1.12-.31-.11-.54-.17-.77.17s-.88 1.11-1.08 1.34-.4.25-.75.08a9.43 9.43 0 0 1-2.77-1.71 10.41 10.41 0 0 1-1.92-2.39c-.2-.34-.02-.52.15-.7s.35-.4.52-.6c.17-.17.23-.3.35-.5s.06-.37-.03-.54c-.09-.18-.77-1.86-1.06-2.55-.28-.68-.56-.59-.77-.6h-.65a1.27 1.27 0 0 0-.92.43 3.87 3.87 0 0 0-1.21 2.87 6.73 6.73 0 0 0 1.4 3.57 15.42 15.42 0 0 0 5.89 5.2c1.4.6 2.48.96 3.33 1.23a8 8 0 0 0 3.66.23c1.11-.16 2.43-.99 2.77-1.95s.34-1.79.23-1.96-.41-.29-.76-.46z"/></svg>
+    </a>
 
     <div class="main-header">
-        <div class="header-left">
-            <button class="menu-toggle" onclick="toggleNav()">☰</button>
-        </div>
+        <div class="header-left"><button class="menu-toggle" onclick="toggleNav()">☰</button></div>
         <div class="header-center">
             <h1>চিত্রাঙ্গনা</h1>
             <div class="sub-brand">Chitrangana</div>
         </div>
         <div class="header-right">
-            <span class="header-icon">🔍</span>
+            <span class="header-icon" onclick="toggleSearch(true)">🔍</span>
             <span class="header-icon">♡</span>
             <span class="header-icon">👜</span>
+        </div>
+        <div class="search-overlay" id="searchOverlay">
+            <input type="text" id="searchInput" placeholder="প্রোডাক্টের নাম দিয়ে খুঁজুন..." oninput="executeSearch()">
+            <span class="close-search" onclick="toggleSearch(false)">×</span>
         </div>
     </div>
 
@@ -562,120 +299,103 @@
         <div class="close-nav" onclick="toggleNav()">×</div>
         <ul class="side-nav-links">
             <li><a href="#" onclick="toggleNav()">Daily Items</a></li>
-            <li><a href="#handmade" onclick="toggleNav()">Handmade Product</a></li>
-            <li><a href="#jewellery" onclick="toggleNav()">Jewellery</a></li>
-            <li><a href="#ornaments" onclick="toggleNav()">Ornaments</a></li>
-            <li><a href="#cosmetics" onclick="toggleNav()">Cosmetics</a></li>
-            <li><a href="#skincare" onclick="toggleNav()">Skincare</a></li>
-            <li><a href="#bags" onclick="toggleNav()">Bags & Shoes</a></li>
-            <li><a href="#others" onclick="toggleNav()">Others</a></li>
+            <li><a href="#topSelling" onclick="toggleNav()">Top Selling</a></li>
+            <li><a href="#viral" onclick="toggleNav()">Viral Products</a></li>
+            <li><a href="#festive" onclick="toggleNav()">Festive Collection</a></li>
+            <li><a href="#cosmetics" onclick="toggleNav()">Best Cosmetics</a></li>
+            <li><a href="#skincare" onclick="toggleNav()">Skin Care</a></li>
         </ul>
     </div>
 
     <div class="slider-container">
-        <div class="slider-wrapper">
-            <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1200" class="slide-img active" alt="Recent 1">
-            <img src="https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=1200" class="slide-img" alt="Recent 2">
-            <img src="https://images.unsplash.com/photo-1630019852942-f89202989a59?w=1200" class="slide-img" alt="Recent 3">
-            <div class="slider-title-overlay">Recent Product Showcase</div>
+        <div class="slider-wrapper" id="heroSliderContainer">
+            <div class="slider-title-overlay" id="sliderText">Chitrangana Collection</div>
         </div>
     </div>
 
-    <div class="section-wrapper">
-        <div class="section-header">
-            <h2>Top Selling Products</h2>
-        </div>
+    <div class="section-wrapper" id="topSelling">
+        <div class="section-header"><h2>Top Selling Products</h2></div>
         <div class="editorial-grid" id="topSellingGrid"></div>
         <button class="view-all-btn">View All</button>
     </div>
 
-    <div class="section-wrapper">
-        <div class="section-header">
-            <h2>Viral Products</h2>
-        </div>
+    <div class="section-wrapper" id="viral">
+        <div class="section-header"><h2>Viral Products</h2></div>
         <div class="editorial-grid" id="viralGrid"></div>
         <button class="view-all-btn">View All</button>
     </div>
 
-    <div class="section-wrapper" id="jewellery">
-        <div class="section-header">
-            <h2>Festive Collection</h2>
-        </div>
+    <div class="section-wrapper" id="festive">
+        <div class="section-header"><h2>Festive Collection</h2></div>
         <div class="editorial-grid" id="festiveGrid"></div>
         <button class="view-all-btn">View All</button>
     </div>
 
     <div class="section-wrapper" id="cosmetics">
-        <div class="section-header">
-            <h2>Best Cosmetics</h2>
-        </div>
+        <div class="section-header"><h2>Best Cosmetics</h2></div>
         <div class="editorial-grid" id="cosmeticsGrid"></div>
         <button class="view-all-btn">View All</button>
     </div>
 
     <div class="section-wrapper" id="skincare">
-        <div class="section-header">
-            <h2>Skin Care</h2>
-        </div>
+        <div class="section-header"><h2>Skin Care</h2></div>
         <div class="editorial-grid" id="skincareGrid"></div>
         <button class="view-all-btn">View All</button>
     </div>
 
-    <div class="section-wrapper">
-        <div class="section-header">
-            <h2>Shots of products</h2>
-        </div>
-        <div class="video-container">
-            <div class="video-box">
-                <video src="https://assets.mixkit.co/videos/preview/mixkit-luxury-jewelry-box-with-rings-41662-large.mp4" loop muted autoplay></video>
+    <div class="section-wrapper" id="videoSectionArea" style="display:none;">
+        <div class="section-header"><h2>Shots of products</h2></div>
+        <div class="video-container" id="dynamicVideoGrid">
             </div>
-            <div class="video-box">
-                <video src="https://assets.mixkit.co/videos/preview/mixkit-close-up-of-a-woman-putting-on-a-gold-ring-41655-large.mp4" loop muted autoplay></video>
-            </div>
-            <div class="video-box">
-                <video src="https://assets.mixkit.co/videos/preview/mixkit-elegant-gold-necklaces-on-display-41659-large.mp4" loop muted autoplay></video>
-            </div>
-            <div class="video-box">
-                <video src="https://assets.mixkit.co/videos/preview/mixkit-makeup-brushes-applying-powder-to-a-face-40156-large.mp4" loop muted autoplay></video>
-            </div>
-        </div>
     </div>
 
     <div class="brand-statement">
-        <h3>চিত্রাঙ্গনা</h3>
+        <h3>...চিত্রাঙ্গনা...</h3>
         <p>“আপনার উৎসব ও অনুষ্ঠানের পরিপূর্ণ সাজের বিশ্বস্ত নাম — চিত্রাঙ্গনা।”</p>
-        
         <div class="badges-grid">
-            <div class="badge-item">
-                <div class="badge-icon">📦</div>
-                <div class="badge-title">Premium Packaging</div>
-            </div>
-            <div class="badge-item">
-                <div class="badge-icon">✨</div>
-                <div class="badge-title">150+ Happy Customers</div>
-            </div>
-            <div class="badge-item">
-                <div class="badge-icon">🇧🇩</div>
-                <div class="badge-title">Handcrafted In Bangladesh</div>
-            </div>
-            <div class="badge-item">
-                <div class="badge-icon">💬</div>
-                <div class="badge-title">WhatsApp To Perfect Order</div>
-            </div>
+            <div class="badge-item"><div class="badge-icon">📦</div><div class="badge-title">Premium Packaging</div></div>
+            <div class="badge-item"><div class="badge-icon">✨</div><div class="badge-title">150+ Happy Customers</div></div>
+            <div class="badge-item"><div class="badge-icon">🇧🇩</div><div class="badge-title">Handcrafted In Bangladesh</div></div>
+            <div class="badge-item"><div class="badge-icon">💬</div><div class="badge-title">WhatsApp To Order</div></div>
         </div>
     </div>
 
     <div class="detail-popup" id="productDetailPopup">
         <div class="detail-content">
             <div class="popup-close" onclick="closePopup()">×</div>
-            <div class="popup-img-wrap">
-                <img src="" id="popupImg" alt="Selected Spec">
+            <div class="popup-gallery-wrap">
+                <div class="popup-img-container" id="popupImgContainer"></div>
+                <button class="popup-arrow prev" id="popupPrevBtn" onclick="changePopupSlide(-1)">❮</button>
+                <button class="popup-arrow next" id="popupNextBtn" onclick="changePopupSlide(1)">❯</button>
+                <div class="popup-dots" id="popupDotsContainer"></div>
             </div>
             <div class="popup-info-wrap">
                 <h2 class="popup-title" id="popupTitle">Product Name</h2>
                 <div class="popup-price" id="popupPrice">00 BDT</div>
-                <p class="popup-desc" id="popupDesc">Detailed structural descriptions will be placed seamlessly here.</p>
-                <a href="" id="popupWhatsAppBtn" target="_blank" class="popup-order-btn">Send Selection to WhatsApp</a>
+                <p class="popup-desc" id="popupDesc">Product description.</p>
+                
+                <button class="open-form-btn" id="openFormBtn" onclick="showOrderForm()">Order via WhatsApp</button>
+                
+                <div class="order-form-container" id="orderFormModule">
+                    <h4>Delivery Information</h4>
+                    <div class="form-group">
+                        <label>Your Name *</label>
+                        <input type="text" id="custName" placeholder="আপনার নাম লিখুন" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Product Name</label>
+                        <input type="text" id="custProduct" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Quantity *</label>
+                        <input type="number" id="custQty" value="1" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Delivery Location *</label>
+                        <textarea id="custLocation" rows="2" placeholder="পূর্ণাঙ্গ ঠিকানা ও ফোন নাম্বার লিখুন" required></textarea>
+                    </div>
+                    <button class="submit-order-btn" onclick="sendOrderToWhatsApp()">Confirm Order via WhatsApp ➔</button>
+                </div>
             </div>
         </div>
     </div>
@@ -693,54 +413,126 @@
                 <a href="https://wa.me/8801850341190" target="_blank">Direct Chat via WhatsApp</a>
             </div>
         </div>
-        <div class="copyright">© 2026 CHITRANGANA ARCHIVE. ALL IMAGERY CURATED AND VERIFIED INDEPENDENTLY.</div>
+        <div class="copyright">© 2026 CHITRANGANA ARCHIVE.</div>
     </footer>
 
     <script>
-        /* ACTIVE GLOBAL PRODUCT DATA STORES (4 SEPARATE ENTRIES FOR EACH ACCORDING TO YOUR REQUIREMENT) */
-        const dataset = {
-            topSelling: [
-                { id: 101, title: "Royal Floral Choker Set", price: "450 BDT", desc: "শতভাগ নিখুঁত প্রিমিয়াম সুতা এবং কারিগর দ্বারা কাস্টমাইজড ডিজাইনে তৈরি রয়্যাল গলার চোকার।", img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500" },
-                { id: 102, title: "Antique Crafted Choker", price: "480 BDT", desc: "ঐতিহ্যবাহী মেটালিক এন্টিক ডিজাইনের চমৎকার বুটিক কালেকশন চোকার সেট।", img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500" },
-                { id: 103, title: "Pastel Elegance Mala", price: "320 BDT", desc: "হালকা রঙের কটন থ্রেড এবং ক্রিস্টাল বিডসের আকর্ষক রীতির কম্বিনেশন মালা।", img: "https://images.unsplash.com/photo-1630019852942-f89202989a59?w=500" },
-                { id: 104, title: "Boho Fusion Neckpiece", price: "400 BDT", desc: "ফিউশন লুকের জন্য কটন এবং কড়ির সুন্দর মেলবন্ধনে তৈরি স্টেটমেন্ট গহনা।", img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500" }
-            ],
-            viral: [
-                { id: 201, title: "Handcrafted Jhumka Premium", price: "380 BDT", desc: "সোশ্যাল মিডিয়ায় ভাইরাল নিখুঁত কারুকাজ খচিত আমাদের সিগনেচার ট্র্যাডিশনাল ঝুমকা।", img: "https://images.unsplash.com/photo-1630019852942-f89202989a59?w=500" },
-                { id: 202, title: "Mirror Work Glass Bangles", price: "250 BDT", desc: "হাতে বোনা কাস্টম সুতা ও মিরর বসানো এক্সক্লুসিভ কাঁচের চুড়ির সেট।", img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500" },
-                { id: 203, title: "Crimson Silk Thread Rings", price: "180 BDT", desc: "প্রিমিয়াম সিল্ক থ্রেড দিয়ে মোড়ানো গর্জিয়াস পার্টি থিম ফিঙ্গার রিং।", img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500" },
-                { id: 204, title: "Threaded Pearl Anklet", price: "220 BDT", desc: "পায়ে পরার জন্য রেশমি সুতা ও ছোট আকৃতির পার্ল বিডসের তৈরি প্রিমিয়াম পায়েল।", img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500" }
-            ],
-            festive: [
-                { id: 301, title: "Bespoke Pastel Pearl Wrist Wear", price: "290 BDT", desc: "যেকোনো বিশেষ উৎসবের জন্য গর্জিয়াস পার্ল এবং গ্লাস বিডস কম্বিনেশন রিস্ট ব্রেসলেট।", img: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=500" },
-                { id: 302, title: "Royal Baala Bangle Set", price: "390 BDT", desc: "উৎসবের জমকালো সাজ পূর্ণ করতে রাজকীয় মোটিফের ম্যাচিং বালা পেয়ার।", img: "https://images.unsplash.com/photo-1630019852942-f89202989a59?w=500" },
-                { id: 303, title: "Zari Embroidered Ear Studs", price: "240 BDT", desc: "জরি এবং কুন্দন ওয়ার্কের নিখুঁত ফিনিশিং সমৃদ্ধ লাক্সারি কানের টপ।", img: "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500" },
-                { id: 304, title: "Heritage Chanderi Necklace", price: "550 BDT", desc: "উৎসব ও অনুষ্ঠানের শাড়ির সাথে মানানসই সম্পূর্ণ ট্র্যাডিশনাল নেকলেস কালেকশন।", img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500" }
-            ],
-            cosmetics: [
-                { id: 401, title: "Ultra Matte Mini Liquid Lipstick", price: "135 BDT", desc: "স্মাজ-প্রুফ এবং দীর্ঘস্থায়ী ওয়াটারপ্রুফ আল্ট্রা ফাইন ম্যাট মিনি লিপস্টিক।", img: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=500" },
-                { id: 402, title: "Velvet Lip Cushion Tint", price: "160 BDT", desc: "হালকা ও মখমলে টেক্সচারের লিপ টিন্ট যা ঠোঁটকে সারাদিন হাইড্রেটেড রাখে।", img: "https://images.unsplash.com/photo-1625093742435-6fa192b6fb10?w=500" },
-                { id: 403, title: "HD Longstay Kohl Kajal", price: "190 BDT", desc: "ডিপ ব্ল্যাক স্মুজফ্রি আই লাইনার প্লাস কাজল, যা ২৪ ঘণ্টা নিখুঁত থাকে।", img: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=500" },
-                { id: 404, title: "Satin Finish Compact Powder", price: "280 BDT", desc: "অয়েল কন্ট্রোল ফর্মুলা সমৃদ্ধ সেটিং কমপ্যাক্ট পাউডার, প্রফেশনাল মেকআপ লুকের জন্য।", img: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=500" }
-            ],
-            skincare: [
-                { id: 501, title: "Hydrating Aloe Soothing Gel", price: "240 BDT", desc: "ত্বকের রুক্ষতা দূর করতে এবং ইনস্ট্যান্ট গ্লো আনতে সাহায্যকারী পিওর সুথিং জেল।", img: "https://images.unsplash.com/photo-1556228720-195a672e8a03?w=500" },
-                { id: 502, title: "Glow Boost Vitamin C Serum", price: "450 BDT", desc: "ত্বকের কালো দাগ দূর করতে এবং উজ্জ্বলতা বাড়াতে কার্যকরী ভিটামিন সি সিরাম।", img: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?w=500" },
-                { id: 503, title: "Gentle Foaming Amino Cleanser", price: "320 BDT", desc: "ত্বকের গভীর থেকে ময়লা পরিষ্কার করার জন্য মৃদু ও ক্ষতিকারক কেমিক্যালমুক্ত ফেসওয়াশ।", img: "https://images.unsplash.com/photo-1556228515-90d2914f1f5e?w=500" },
-                { id: 504, title: "Aqua Moist Deep Cream", price: "380 BDT", desc: "ত্বকের আর্দ্রতা ধরে রেখে সফট ও প্লাম্পি লুক দেওয়ার জন্য ডে নাইট ময়েশ্চারাইজার।", img: "https://images.unsplash.com/photo-1608248597481-496100c8c836?w=500" }
-            ]
-        };
+        const SHEET_ID = '1_WVEQnc5SxLeHAZqA78K7xAJ7eFFAWXCkXn8GAkealg'; 
+        const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
-        /* RENDER SCRIPT MODULES */
+        let allProducts = [];
+        let sliderImages = [];
+        let shortVideos = [];
+        let currentPopupSlideIndex = 0;
+        let currentPopupImages = [];
+        let selectedProductPrice = "";
+
+        async function loadDataFromSheet() {
+            try {
+                const response = await fetch(SHEET_URL);
+                const text = await response.text();
+                const jsonData = JSON.parse(text.substr(47).slice(0, -2));
+                const rows = jsonData.table.rows;
+                
+                allProducts = [];
+                sliderImages = [];
+                shortVideos = [];
+
+                rows.forEach(row => {
+                    const rawImgStr = row.c[4] ? row.c[4].v : '';
+                    const imgArray = rawImgStr.split(',').map(link => link.trim()).filter(link => link !== '');
+
+                    const rawSectionStr = row.c[5] ? row.c[5].v : 'topSelling';
+                    const sectionsArray = rawSectionStr.split(',').map(s => s.trim()).filter(s => s !== '');
+                    
+                    const title = row.c[1] ? row.c[1].v : '';
+                    const price = row.c[2] ? row.c[2].v : '';
+                    const desc = row.c[3] ? row.c[3].v : '';
+
+                    // Separating sections based on Google Sheet tags
+                    if (sectionsArray.includes('heroSlider')) {
+                        if(imgArray.length > 0) sliderImages.push({url: imgArray[0], title: desc || title});
+                    } else if (sectionsArray.includes('shortVideo')) {
+                        if(imgArray.length > 0) shortVideos.push(imgArray[0]);
+                    } else {
+                        allProducts.push({
+                            id: row.c[0] ? row.c[0].v : '',
+                            title: title,
+                            price: price,
+                            desc: desc,
+                            images: imgArray,
+                            sections: sectionsArray 
+                        });
+                    }
+                });
+
+                renderBanners();
+                renderVideos();
+                renderAllGrids(allProducts);
+            } catch (error) {
+                console.error("Data load error:", error);
+            }
+        }
+
+        // RENDER DYNAMIC BANNER SLIDER
+        function renderBanners() {
+            const container = document.getElementById('heroSliderContainer');
+            // If empty, put standard placeholder
+            if (sliderImages.length === 0) {
+                sliderImages.push({url: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1200', title: 'Curated Jewels'});
+            }
+            // Keep the overlay clean
+            container.innerHTML = `<div class="slider-title-overlay" id="sliderText">Chitrangana Edit</div>`;
+            
+            sliderImages.forEach((slide, idx) => {
+                const activeClass = idx === 0 ? 'active' : '';
+                container.innerHTML += `<img src="${slide.url}" class="slide-img ${activeClass}" alt="Banner">`;
+            });
+            if(sliderImages[0]) document.getElementById('sliderText').innerText = sliderImages[0].title || "Chitrangana Edit";
+        }
+
+        // RENDER DYNAMIC SHORT VIDEOS
+        function renderVideos() {
+            const area = document.getElementById('videoSectionArea');
+            const grid = document.getElementById('dynamicVideoGrid');
+            grid.innerHTML = "";
+            
+            if (shortVideos.length === 0) {
+                area.style.display = "none";
+                return;
+            }
+            area.style.display = "block";
+            shortVideos.forEach(vidUrl => {
+                grid.innerHTML += `
+                    <div class="video-box">
+                        <video src="${vidUrl}" loop muted autoplay playsinline></video>
+                    </div>
+                `;
+            });
+        }
+
+        function renderAllGrids(productsArray) {
+            injectGrid('topSellingGrid', productsArray.filter(p => p.sections.includes('topSelling')));
+            injectGrid('viralGrid', productsArray.filter(p => p.sections.includes('viral')));
+            injectGrid('festiveGrid', productsArray.filter(p => p.sections.includes('festive')));
+            injectGrid('cosmeticsGrid', productsArray.filter(p => p.sections.includes('cosmetics')));
+            injectGrid('skincareGrid', productsArray.filter(p => p.sections.includes('skincare')));
+        }
+
         function injectGrid(gridId, array) {
             const wrapper = document.getElementById(gridId);
             wrapper.innerHTML = "";
-            array.forEach(p => {
+            if(array.length === 0) {
+                wrapper.innerHTML = `<p style="grid-column:span 2; color:#aaa; font-size:0.8rem; text-align:center; padding:20px;">No items active.</p>`;
+                return;
+            }
+            array.slice(0, 4).forEach(p => {
+                const displayImg = p.images.length > 0 ? p.images[0] : 'https://via.placeholder.com/500';
+                const imgStringParam = encodeURIComponent(JSON.stringify(p.images));
+
                 wrapper.innerHTML += `
-                    <div class="luxury-card" onclick="openPopup('${p.title}', '${p.price}', '${p.desc}', '${p.img}')">
-                        <div class="card-img-holder">
-                            <img src="${p.img}" alt="${p.title}">
-                        </div>
+                    <div class="luxury-card" onclick="openPopup('${p.title.replace(/'/g, "\\'")}', '${p.price}', '${p.desc.replace(/'/g, "\\'")}', '${imgStringParam}')">
+                        <div class="card-img-holder"><img src="${displayImg}" alt="${p.title}"></div>
                         <div class="card-details">
                             <h3 class="card-title">${p.title}</h3>
                             <div class="card-price">${p.price}</div>
@@ -750,55 +542,88 @@
             });
         }
 
-        /* DRAWER CONTROLLER */
-        function toggleNav() {
-            const sNav = document.getElementById('sideNav');
-            const overlay = document.getElementById('navOverlay');
-            if(sNav.classList.contains('open')) {
-                sNav.classList.remove('open');
-                overlay.style.display = "none";
+        // ACTIVE INSTANT SEARCH SYSTEM
+        function toggleSearch(show) {
+            const overlay = document.getElementById('searchOverlay');
+            overlay.style.display = show ? 'flex' : 'none';
+            if(show) {
+                document.getElementById('searchInput').focus();
             } else {
-                sNav.classList.add('open');
-                overlay.style.display = "block";
+                document.getElementById('searchInput').value = '';
+                renderAllGrids(allProducts);
             }
         }
 
-        /* RECENT SLIDER ANIM MODULE */
+        function executeSearch() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = allProducts.filter(p => p.title.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query));
+            renderAllGrids(filtered);
+        }
+
+        function toggleNav() {
+            const sNav = document.getElementById('sideNav');
+            const overlay = document.getElementById('navOverlay');
+            sNav.classList.toggle('open');
+            overlay.style.display = sNav.classList.contains('open') ? 'block' : 'none';
+        }
+
+        // HERO BANNER SLIDER ACTION
         let activeSlideIndex = 0;
         function runSlider() {
             const slides = document.querySelectorAll('.slide-img');
+            if(slides.length <= 1) return;
+            
             slides[activeSlideIndex].classList.remove('active');
             activeSlideIndex = (activeSlideIndex + 1) % slides.length;
             slides[activeSlideIndex].classList.add('active');
+            
+            if(sliderImages[activeSlideIndex]) {
+                document.getElementById('sliderText').innerText = sliderImages[activeSlideIndex].title || "Chitrangana Edit";
+            }
         }
 
-        /* DETAIL POPUP LOGIC CONTROL */
-        function openPopup(title, price, desc, imgUrl) {
+        // MULTI-IMAGE POPUP OVERLAY LOGIC
+        function openPopup(title, price, desc, encodedImages) {
             document.getElementById('popupTitle').innerText = title;
             document.getElementById('popupPrice').innerText = price;
             document.getElementById('popupDesc').innerText = desc;
-            document.getElementById('popupImg').src = imgUrl;
+            selectedProductPrice = price;
             
-            const waMsg = `*CHITRANGANA - NEW WEB ORDER*\n\n✨ *Product Name:* ${title}\n💰 *Price:* ${price}\n\n_Please process my selection order._`;
-            document.getElementById('popupWhatsAppBtn').href = `https://api.whatsapp.com/send?phone=8801850341190&text=${encodeURIComponent(waMsg)}`;
+            document.getElementById('custProduct').value = title;
+            document.getElementById('orderFormModule').style.display = "none";
+            document.getElementById('openFormBtn').style.display = "block";
             
+            document.getElementById('custName').value = "";
+            document.getElementById('custQty').value = "1";
+            document.getElementById('custLocation').value = "";
+
+            currentPopupImages = JSON.parse(decodeURIComponent(encodedImages));
+            if(currentPopupImages.length === 0) {
+                currentPopupImages.push('https://via.placeholder.com/500');
+            }
+
+            const imgContainer = document.getElementById('popupImgContainer');
+            const dotsContainer = document.getElementById('popupDotsContainer');
+            imgContainer.innerHTML = "";
+            dotsContainer.innerHTML = "";
+            currentPopupSlideIndex = 0;
+
+            currentPopupImages.forEach((imgUrl, index) => {
+                const imgClass = index === 0 ? 'class="active"' : '';
+                imgContainer.innerHTML += `<img src="${imgUrl}" ${imgClass} id="popupSlide-${index}" alt="Slide">`;
+                const dotClass = index === 0 ? 'class="popup-dot active"' : 'class="popup-dot"';
+                dotsContainer.innerHTML += `<div ${dotClass} id="popupDot-${index}" onclick="setPopupSlide(${index})"></div>`;
+            });
+
+            const arrows = document.querySelectorAll('.popup-arrow');
+            arrows.forEach(arrow => {
+                arrow.style.display = currentPopupImages.length > 1 ? 'block' : 'none';
+            });
+
             document.getElementById('productDetailPopup').style.display = "block";
         }
 
-        function closePopup() {
-            document.getElementById('productDetailPopup').style.display = "none";
-        }
+        function changePopupSlide(direction) { updatePopupSlideDisplay(currentPopupSlideIndex + direction); }
+        function setPopupSlide(index) { updatePopupSlideDisplay(index); }
 
-        /* MOUNTING DATA EXECUTION */
-        window.onload = function() {
-            injectGrid('topSellingGrid', dataset.topSelling);
-            injectGrid('viralGrid', dataset.viral);
-            injectGrid('festiveGrid', dataset.festive);
-            injectGrid('cosmeticsGrid', dataset.cosmetics);
-            injectGrid('skincareGrid', dataset.skincare);
-            
-            setInterval(runSlider, 4000); // অটোমেটিক ৪ সেকেন্ড পর পর ব্যানার চেঞ্জ হবে
-        };
-    </script>
-</body>
-</html>
+        function updatePopupSlideDisplay(nextIndex) {
