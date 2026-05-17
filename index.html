@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chitrangana - Premium Collection</title>
     <style>
-        /* কালার থিম: Rose Gold, Light Pink, Gold & Luxury White */
         :root {
             --primary-pink: #F7E7E4;
             --rose-gold: #B76E79;
@@ -26,7 +25,6 @@
             color: var(--luxury-black);
         }
 
-        /* হেডার ও লোগো সেকশন */
         header {
             background-color: var(--pure-white);
             text-align: center;
@@ -49,7 +47,6 @@
             font-style: italic;
         }
 
-        /* নেভিগেশন ক্যাটাগরি */
         .category-nav {
             display: flex;
             overflow-x: auto;
@@ -83,7 +80,6 @@
             color: var(--pure-white);
         }
 
-        /* প্রোডাক্ট গ্রিড */
         .container {
             max-width: 1200px;
             margin: 20px auto;
@@ -106,11 +102,6 @@
             transition: transform 0.3s;
         }
 
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-
-        /* ইমেজ গ্যালারি (মাল্টিপল অ্যাঙ্গেল) */
         .image-container {
             position: relative;
             width: 100%;
@@ -148,7 +139,6 @@
             border-color: var(--rose-gold);
         }
 
-        /* প্রোডাক্ট ইনফরমেশন */
         .product-info {
             padding: 20px;
         }
@@ -177,11 +167,32 @@
             line-height: 1.4;
         }
 
-        .product-price {
-            font-size: 1.3rem;
+        .price-container {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .old-price {
+            font-size: 1.1rem;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .new-price {
+            font-size: 1.4rem;
             color: var(--dark-gold);
             font-weight: bold;
-            margin-bottom: 15px;
+        }
+
+        .offer-badge {
+            background: #ff4d4d;
+            color: white;
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
         }
 
         .order-btn {
@@ -203,7 +214,6 @@
             background-color: var(--dark-gold);
         }
 
-        /* অর্ডার ফর্ম পপআপ মোডাল */
         .modal {
             display: none;
             position: fixed;
@@ -225,7 +235,6 @@
             width: 100%;
             max-width: 450px;
             position: relative;
-            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
         }
 
         .close-modal {
@@ -277,7 +286,6 @@
             margin-top: 10px;
         }
 
-        /* ফুটার এবং সামাজিক যোগাযোগ লিংক */
         footer {
             background: var(--pure-white);
             text-align: center;
@@ -309,7 +317,7 @@
             font-size: 0.85rem;
             color: #888;
         }
-    </script>
+    </style>
 </head>
 <body>
 
@@ -329,8 +337,7 @@
     </div>
 
     <div class="container">
-        <div class="product-grid" id="productGrid">
-            </div>
+        <div class="product-grid" id="productGrid"></div>
     </div>
 
     <div class="modal" id="orderModal">
@@ -372,19 +379,20 @@
     </footer>
 
     <script>
-        // 📢 আনলিমিটেড প্রোডাক্ট অ্যাড ও ডিলিট করার মূল ডাটাবেজ (Array)
         const products = [
             {
                 id: 1,
-                title: "Premium Handmade Floral Choker", // প্রোডাক্টের নাম
-                category: "Handmade Products",         // সঠিক ক্যাটাগরি মিলিয়ে লিখবেন
-                type: "Premium Jewelry",              // টাইপ বা মেটেরিয়াল
-                price: "450 Taka",                    // মূল্য
-                desc: "শতভাগ খাঁটি সুতা এবং পুঁতি দিয়ে যত্নসহকারে কাস্টমাইজড ডিজাইনে তৈরি করা গলার চোকার।", // বিবরণ
+                title: "Premium Handmade Floral Choker",
+                category: "Handmade Products",
+                type: "Premium Jewelry",
+                hasDiscount: false,
+                price: "450 Taka",
+                oldPrice: "",
+                discountText: "",
+                desc: "শতভাগ খাঁটি সুতা এবং পুঁতি দিয়ে যত্নসহকারে কাস্টমাইজড ডিজাইনে তৈরি করা গলার চোকার।",
                 images: [
-                    "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500", // প্রধান ছবি (১ম অ্যাঙ্গেল)
-                    "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500", // ২য় অ্যাঙ্গেল এর ছবি
-                    "https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=500"  // ৩য় অ্যাঙ্গেল এর ছবি
+                    "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=500",
+                    "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=500"
                 ]
             },
             {
@@ -392,16 +400,18 @@
                 title: "Ultra Matte Mini Liquid Lipstick",
                 category: "Cosmetics",
                 type: "Beauty Glazed",
-                price: "135 Taka (10% OFF)",
-                desc: "দীর্ঘস্থায়ী ম্যাট ফিনিশ এবং অত্যন্ত আকর্ষক শেড। ১০% ছাড়ে সীমিত স্টকে উপলব্ধ। Each 150 Taka cross করে 135 Taka করা হয়েছে।",
+                hasDiscount: true,
+                price: "135 Taka",
+                oldPrice: "150 Taka",
+                discountText: "10% OFF",
+                desc: "দীর্ঘস্থায়ী ম্যাট ফিনিশ এবং অত্যন্ত আকর্ষক শেড। সীমিত স্টকে উপলব্ধ।",
                 images: [
-                    "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=500", // ১ম অ্যাঙ্গেল
-                    "https://images.unsplash.com/photo-1625093742435-6fa192b6fb10?w=500"  // ২য় অ্যাঙ্গেল
+                    "https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=500",
+                    "https://images.unsplash.com/photo-1625093742435-6fa192b6fb10?w=500"
                 ]
             }
         ];
 
-        // ওয়েবসাইট স্ক্রিনে প্রোডাক্টগুলো দেখানোর ফাংশন
         function displayProducts(filteredData) {
             const grid = document.getElementById('productGrid');
             grid.innerHTML = "";
@@ -417,6 +427,17 @@
                     thumbHTML += `<img src="${img}" class="thumb-img ${index===0?'active':''}" onclick="changeMainImage(this, 'prod-img-${product.id}')">`;
                 });
 
+                let priceHTML = '';
+                if(product.hasDiscount) {
+                    priceHTML = `
+                        <span class="old-price">${product.oldPrice}</span>
+                        <span class="new-price">${product.price}</span>
+                        <span class="offer-badge">${product.discountText}</span>
+                    `;
+                } else {
+                    priceHTML = `<span class="new-price">${product.price}</span>`;
+                }
+
                 const cardHTML = `
                     <div class="product-card">
                         <div class="image-container">
@@ -427,7 +448,7 @@
                             <span class="product-tag">${product.category} • ${product.type}</span>
                             <h3 class="product-title">${product.title}</h3>
                             <p class="product-desc">${product.desc}</p>
-                            <div class="product-price">${product.price}</div>
+                            <div class="price-container">${priceHTML}</div>
                             <button class="order-btn" onclick="openOrderForm('${product.title}', '${product.price}')">Order Now</button>
                         </div>
                     </div>
@@ -439,7 +460,6 @@
         function changeMainImage(thumb, mainImgId) {
             const mainImg = document.getElementById(mainImgId);
             mainImg.src = thumb.src;
-            
             const thumbs = thumb.parentElement.getElementsByClassName('thumb-img');
             for(let t of thumbs) { t.classList.remove('active'); }
             thumb.classList.add('active');
@@ -470,17 +490,12 @@
             document.getElementById('formProductPrice').value = price;
         }
 
-        document.querySelector('.close-modal').addEventListener('click', function() {
-            document.getElementById('orderModal').style.display = 'none';
-        });
-        
         function closeOrderForm() {
             document.getElementById('orderModal').style.display = 'none';
         }
 
         function sendToWhatsApp(event) {
             event.preventDefault();
-            
             const pName = document.getElementById('formProductName').value;
             const pPrice = document.getElementById('formProductPrice').value;
             const cName = document.getElementById('custName').value;
@@ -496,7 +511,6 @@
                             `_অনুগ্রহ করে অর্ডারটি কনফার্ম করুন।_`;
             
             const whatsappURL = `https://api.whatsapp.com/send?phone=8801850341190&text=${encodeURIComponent(message)}`;
-            
             window.open(whatsappURL, '_blank');
             closeOrderForm();
         }
