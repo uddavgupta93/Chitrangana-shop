@@ -41,7 +41,7 @@
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* UTILITY HEADER */
+        /* MAIN UTILITY HEADER */
         .main-header {
             display: flex;
             justify-content: space-between;
@@ -56,6 +56,7 @@
             display: flex;
             align-items: center;
             gap: 15px;
+            z-index: 5;
         }
 
         .menu-toggle {
@@ -95,6 +96,7 @@
             gap: 20px;
             font-size: 1.15rem;
             color: var(--amama-dark);
+            z-index: 5;
         }
 
         .header-icon {
@@ -103,7 +105,7 @@
         }
         .header-icon:hover { color: var(--gold-accent); }
 
-        /* INTERACTIVE SEARCH BAR OVERLAY */
+        /* FIXED ACTIVE SEARCH BAR OVERLAY */
         .search-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -112,19 +114,21 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 25px;
-            z-index: 10;
+            z-index: 20;
         }
         .search-overlay input {
-            width: 85%;
+            width: 90%;
             border: none;
             outline: none;
             font-family: 'Montserrat', sans-serif;
             font-size: 1rem;
             color: var(--amama-dark);
+            padding: 10px 0;
         }
         .close-search {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
+            color: var(--amama-gray);
         }
 
         /* FLOATING WHATSAPP ICON */
@@ -172,16 +176,16 @@
             background: rgba(0,0,0,0.1); z-index: 1001; display: none;
         }
 
-        /* AUTOPLAY RECENT SLIDER */
+        /* AUTOPLAY HERO SLIDER */
         .slider-container { max-width: 1200px; margin: 25px auto; padding: 0 20px; }
         .slider-wrapper { width: 100%; height: 380px; overflow: hidden; position: relative; background-color: var(--soft-bg); }
         @media(max-width: 768px) { .slider-wrapper { height: 240px; } }
-        .slide-img { width: 100%; height: 100%; object-fit: cover; position: absolute; opacity: 0; transition: opacity 1s ease-in-out; }
+        .slide-img { width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; opacity: 0; transition: opacity 1s ease-in-out; }
         .slide-img.active { opacity: 1; }
         .slider-title-overlay {
             position: absolute; bottom: 20px; left: 20px; color: white;
             font-family: 'Montserrat', sans-serif; letter-spacing: 1.5px; font-size: 0.75rem;
-            text-transform: uppercase; background: rgba(0,0,0,0.3); padding: 6px 14px;
+            text-transform: uppercase; background: rgba(0,0,0,0.4); padding: 6px 14px; z-index: 2;
         }
 
         /* PRODUCT EDITORIAL SECTIONS */
@@ -211,10 +215,10 @@
         /* SHOTS OF PRODUCTS (VIDEO) */
         .video-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
         @media (min-width: 768px) { .video-container { grid-template-columns: repeat(4, 1fr); gap: 25px; } }
-        .video-box { position: relative; width: 100%; padding-top: 170%; background: #000; }
+        .video-box { position: relative; width: 100%; padding-top: 170%; background: #000; overflow: hidden; }
         .video-box video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
 
-        /* BRAND STATEMENT & TRUST BADGES */
+        /* BRAND STATEMENT */
         .brand-statement { background-color: var(--soft-bg); text-align: center; padding: 60px 20px; border-top: 1px solid var(--amama-border); border-bottom: 1px solid var(--amama-border); margin-top: 80px; }
         .brand-statement h3 { font-size: 1.8rem; font-weight: 400; margin-bottom: 15px; letter-spacing: 2px; }
         .brand-statement p { font-size: 1rem; max-width: 600px; margin: 0 auto 40px auto; color: #444; line-height: 1.7; }
@@ -285,9 +289,10 @@
         </div>
         <div class="header-right">
             <span class="header-icon" onclick="toggleSearch(true)">🔍</span>
-            <span class="header-icon">♡</span>
-            <span class="header-icon">👜</span>
+            <span class="header-icon" onclick="alert('প্রিয় পণ্যটি আপনার উইশলিস্টে যুক্ত হয়েছে!')">♡</span>
+            <span class="header-icon" onclick="alert('আপনার ব্যাগটি বর্তমানে খালি আছে!')">👜</span>
         </div>
+        
         <div class="search-overlay" id="searchOverlay">
             <input type="text" id="searchInput" placeholder="প্রোডাক্টের নাম দিয়ে খুঁজুন..." oninput="executeSearch()">
             <span class="close-search" onclick="toggleSearch(false)">×</span>
@@ -309,7 +314,7 @@
 
     <div class="slider-container">
         <div class="slider-wrapper" id="heroSliderContainer">
-            <div class="slider-title-overlay" id="sliderText">Chitrangana Collection</div>
+            <div class="slider-title-overlay" id="sliderText">Chitrangana Edit</div>
         </div>
     </div>
 
@@ -345,8 +350,7 @@
 
     <div class="section-wrapper" id="videoSectionArea" style="display:none;">
         <div class="section-header"><h2>Shots of products</h2></div>
-        <div class="video-container" id="dynamicVideoGrid">
-            </div>
+        <div class="video-container" id="dynamicVideoGrid"></div>
     </div>
 
     <div class="brand-statement">
@@ -426,12 +430,17 @@
         let currentPopupSlideIndex = 0;
         let currentPopupImages = [];
         let selectedProductPrice = "";
+        let activeSlideIndex = 0;
 
+        // FIXED 2026 DYNAMIC PARSER ENGINE
         async function loadDataFromSheet() {
             try {
                 const response = await fetch(SHEET_URL);
                 const text = await response.text();
-                const jsonData = JSON.parse(text.substr(47).slice(0, -2));
+                
+                const startIdx = text.indexOf('{');
+                const endIdx = text.lastIndexOf('}') + 1;
+                const jsonData = JSON.parse(text.substring(startIdx, endIdx));
                 const rows = jsonData.table.rows;
                 
                 allProducts = [];
@@ -439,24 +448,26 @@
                 shortVideos = [];
 
                 rows.forEach(row => {
-                    const rawImgStr = row.c[4] ? row.c[4].v : '';
-                    const imgArray = rawImgStr.split(',').map(link => link.trim()).filter(link => link !== '');
-
-                    const rawSectionStr = row.c[5] ? row.c[5].v : 'topSelling';
-                    const sectionsArray = rawSectionStr.split(',').map(s => s.trim()).filter(s => s !== '');
+                    if(!row.c) return;
                     
-                    const title = row.c[1] ? row.c[1].v : '';
-                    const price = row.c[2] ? row.c[2].v : '';
-                    const desc = row.c[3] ? row.c[3].v : '';
+                    // Fixed Index Scanning Map: id(0), title(1), price(2), desc(3), img(4), section(5)
+                    const id = row.c[0] ? (row.c[0].v !== null ? row.c[0].v : '') : '';
+                    const title = row.c[1] ? (row.c[1].v !== null ? row.c[1].v : '') : '';
+                    const price = row.c[2] ? (row.c[2].v !== null ? row.c[2].v : '') : '';
+                    const desc = row.c[3] ? (row.c[3].v !== null ? row.c[3].v : '') : '';
+                    const rawImgStr = row.c[4] ? (row.c[4].v !== null ? row.c[4].v : '') : '';
+                    const rawSectionStr = row.c[5] ? (row.c[5].v !== null ? row.c[5].v : 'topSelling') : 'topSelling';
 
-                    // Separating sections based on Google Sheet tags
+                    const imgArray = String(rawImgStr).split(',').map(link => link.trim()).filter(link => link !== '');
+                    const sectionsArray = String(rawSectionStr).split(',').map(s => s.trim()).filter(s => s !== '');
+
                     if (sectionsArray.includes('heroSlider')) {
                         if(imgArray.length > 0) sliderImages.push({url: imgArray[0], title: desc || title});
                     } else if (sectionsArray.includes('shortVideo')) {
                         if(imgArray.length > 0) shortVideos.push(imgArray[0]);
-                    } else {
+                    } else if (title !== '') {
                         allProducts.push({
-                            id: row.c[0] ? row.c[0].v : '',
+                            id: id,
                             title: title,
                             price: price,
                             desc: desc,
@@ -470,28 +481,25 @@
                 renderVideos();
                 renderAllGrids(allProducts);
             } catch (error) {
-                console.error("Data load error:", error);
+                console.error("Critical Google Sheet Engine Error:", error);
             }
         }
 
-        // RENDER DYNAMIC BANNER SLIDER
         function renderBanners() {
             const container = document.getElementById('heroSliderContainer');
-            // If empty, put standard placeholder
             if (sliderImages.length === 0) {
-                sliderImages.push({url: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1200', title: 'Curated Jewels'});
+                sliderImages.push({url: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1200', title: 'Chitrangana Premium Jewels'});
             }
-            // Keep the overlay clean
             container.innerHTML = `<div class="slider-title-overlay" id="sliderText">Chitrangana Edit</div>`;
             
             sliderImages.forEach((slide, idx) => {
                 const activeClass = idx === 0 ? 'active' : '';
                 container.innerHTML += `<img src="${slide.url}" class="slide-img ${activeClass}" alt="Banner">`;
             });
+            activeSlideIndex = 0;
             if(sliderImages[0]) document.getElementById('sliderText').innerText = sliderImages[0].title || "Chitrangana Edit";
         }
 
-        // RENDER DYNAMIC SHORT VIDEOS
         function renderVideos() {
             const area = document.getElementById('videoSectionArea');
             const grid = document.getElementById('dynamicVideoGrid');
@@ -526,7 +534,7 @@
                 wrapper.innerHTML = `<p style="grid-column:span 2; color:#aaa; font-size:0.8rem; text-align:center; padding:20px;">No items active.</p>`;
                 return;
             }
-            array.slice(0, 4).forEach(p => {
+            array.slice(0, 8).forEach(p => {
                 const displayImg = p.images.length > 0 ? p.images[0] : 'https://via.placeholder.com/500';
                 const imgStringParam = encodeURIComponent(JSON.stringify(p.images));
 
@@ -542,7 +550,7 @@
             });
         }
 
-        // ACTIVE INSTANT SEARCH SYSTEM
+        // 100% FIXED ACTIVE INSTANT SEARCH OVERLAY MODULE
         function toggleSearch(show) {
             const overlay = document.getElementById('searchOverlay');
             overlay.style.display = show ? 'flex' : 'none';
@@ -555,7 +563,11 @@
         }
 
         function executeSearch() {
-            const query = document.getElementById('searchInput').value.toLowerCase();
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            if(query === "") {
+                renderAllGrids(allProducts);
+                return;
+            }
             const filtered = allProducts.filter(p => p.title.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query));
             renderAllGrids(filtered);
         }
@@ -567,8 +579,6 @@
             overlay.style.display = sNav.classList.contains('open') ? 'block' : 'none';
         }
 
-        // HERO BANNER SLIDER ACTION
-        let activeSlideIndex = 0;
         function runSlider() {
             const slides = document.querySelectorAll('.slide-img');
             if(slides.length <= 1) return;
@@ -582,7 +592,6 @@
             }
         }
 
-        // MULTI-IMAGE POPUP OVERLAY LOGIC
         function openPopup(title, price, desc, encodedImages) {
             document.getElementById('popupTitle').innerText = title;
             document.getElementById('popupPrice').innerText = price;
@@ -627,3 +636,49 @@
         function setPopupSlide(index) { updatePopupSlideDisplay(index); }
 
         function updatePopupSlideDisplay(nextIndex) {
+            if(currentPopupImages.length <= 1) return;
+            document.getElementById(`popupSlide-${currentPopupSlideIndex}`).classList.remove('active');
+            document.getElementById(`popupDot-${currentPopupSlideIndex}`).classList.remove('active');
+            if(nextIndex >= currentPopupImages.length) nextIndex = 0;
+            if(nextIndex < 0) nextIndex = currentPopupImages.length - 1;
+            currentPopupSlideIndex = nextIndex;
+            document.getElementById(`popupSlide-${currentPopupSlideIndex}`).classList.add('active');
+            document.getElementById(`popupDot-${currentPopupSlideIndex}`).classList.add('active');
+        }
+
+        function closePopup() { document.getElementById('productDetailPopup').style.display = "none"; }
+        function showOrderForm() {
+            document.getElementById('openFormBtn').style.display = "none";
+            document.getElementById('orderFormModule').style.display = "block";
+        }
+
+        function sendOrderToWhatsApp() {
+            const name = document.getElementById('custName').value.trim();
+            const product = document.getElementById('custProduct').value.trim();
+            const qty = document.getElementById('custQty').value.trim();
+            const location = document.getElementById('custLocation').value.trim();
+
+            if(!name || !qty || !location) {
+                alert("অনুগ্রহ করে আপনার নাম, পরিমাণ এবং সম্পূর্ণ ঠিকানা সঠিকভাবে লিখুন।");
+                return;
+            }
+
+            const waMessage = `*✨ নতুন অর্ডার কনফার্মেশন - চিত্রাঙ্গনা ✨*\n\n` +
+                              `👤 *কাস্টমারের নাম:* ${name}\n` +
+                              `🛍️ *প্রোডাক্ট:* ${product}\n` +
+                              `💰 *মূল্য:* ${selectedProductPrice}\n` +
+                              `📦 *পরিমাণ (Quantity):* ${qty} টি\n` +
+                              `📍 *ঠিকানা ও ফোন নাম্বার:* ${location}\n\n` +
+                              `_অনুগ্রহ করে অর্ডারটি দ্রুত চেক করে কনফার্ম করুন।_`;
+
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=8801850341190&text=${encodeURIComponent(waMessage)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+
+        window.onload = function() {
+            loadDataFromSheet();
+            setInterval(runSlider, 4000);
+        };
+    </script>
+</body>
+</html>
