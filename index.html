@@ -3,275 +3,283 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chitrangana | Premium Jewellery & Fine Artistry</title>
+    <title>Chitrangana | Elite Handcrafted Premium Brand</title>
     <style>
         :root {
-            --amama-dark: #121212;
-            --amama-gray: #666666;
-            --amama-border: #E8E8E8;
-            --amama-bg: #FFFFFF;
-            --gold-accent: #BFA37A;
-            --soft-bg: #FAFAFA;
-            --whatsapp-green: #25D366;
+            --dark: #0f0f0f;
+            --gray: #777777;
+            --border: #ececec;
+            --bg: #ffffff;
+            --gold: #c3a67f;
+            --gold-light: #f9f6f0;
+            --wa-green: #25D366;
+            --premium-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            --transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: var(--amama-bg);
-            color: var(--amama-dark);
+            background-color: var(--bg);
+            color: var(--dark);
             font-family: 'Playfair Display', 'Georgia', serif;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            opacity: 0;
+            animation: fadeInPage 1.2s forwards;
         }
 
-        /* TOP ANNOUNCEMENT BAR */
+        @keyframes fadeInPage { to { opacity: 1; } }
+
+        /* CINEMATIC TOP BAR */
         .top-bar {
-            background-color: var(--amama-dark);
+            background: linear-gradient(90deg, #121212, #2c2c2c, #121212);
             color: white;
             text-align: center;
-            padding: 8px 10px;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
+            padding: 10px;
+            font-size: 0.68rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
             font-family: 'Montserrat', sans-serif;
         }
 
-        /* MAIN UTILITY HEADER */
+        /* PREMIUM HEADER */
         .main-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 25px;
-            border-bottom: 1px solid var(--amama-border);
-            background: white;
-            position: relative;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            z-index: 5;
+            padding: 25px 40px;
+            border-bottom: 1px solid var(--border);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
         }
 
         .menu-toggle {
-            font-size: 1.4rem;
+            font-size: 1.6rem;
             background: none;
             border: none;
             cursor: pointer;
+            color: var(--dark);
+            transition: var(--transition);
         }
+        .menu-toggle:hover { color: var(--gold); transform: scale(1.1); }
 
         .header-center {
             text-align: center;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
-            width: 60%;
         }
 
         .header-center h1 {
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             font-weight: 500;
-            letter-spacing: 4px;
-            color: var(--amama-dark);
+            letter-spacing: 6px;
+            color: var(--dark);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.03);
         }
 
         .header-center .sub-brand {
             font-family: 'Montserrat', sans-serif;
             font-size: 0.65rem;
-            letter-spacing: 3px;
-            color: var(--amama-gray);
+            letter-spacing: 5px;
+            color: var(--gray);
             text-transform: uppercase;
-            margin-top: 2px;
+            margin-top: 4px;
         }
 
         .header-right {
             display: flex;
             align-items: center;
-            gap: 20px;
-            font-size: 1.15rem;
-            color: var(--amama-dark);
-            z-index: 5;
+            gap: 25px;
+            font-size: 1.25rem;
         }
 
-        .header-icon {
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-        .header-icon:hover { color: var(--gold-accent); }
+        .header-icon { cursor: pointer; transition: var(--transition); }
+        .header-icon:hover { color: var(--gold); transform: translateY(-3px); }
 
-        /* FIXED ACTIVE SEARCH BAR OVERLAY */
+        /* ADVANCED SEARCH OVERLAY */
         .search-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 120px;
             background: white;
             display: none;
             align-items: center;
             justify-content: space-between;
-            padding: 0 25px;
-            z-index: 20;
+            padding: 0 50px;
+            box-shadow: var(--premium-shadow);
+            z-index: 1010;
+            animation: slideDown 0.4s forwards;
         }
+        @keyframes slideDown { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+
         .search-overlay input {
             width: 90%;
             border: none;
             outline: none;
             font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            color: var(--amama-dark);
-            padding: 10px 0;
-        }
-        .close-search {
-            font-size: 1.8rem;
-            cursor: pointer;
-            color: var(--amama-gray);
+            font-size: 1.3rem;
+            color: var(--dark);
         }
 
-        /* FLOATING WHATSAPP ICON */
-        .floating-wa-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: var(--whatsapp-green);
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            z-index: 1001;
-            text-decoration: none;
-            transition: transform 0.3s ease;
-        }
-        .floating-wa-btn:hover { transform: scale(1.08); }
-        .floating-wa-btn svg { width: 32px; height: 32px; fill: white; }
-
-        /* SIDE DRAWER MENU */
+        /* 3-DOT / SIDE MENU DESIGN */
         .side-nav {
             position: fixed;
-            top: 0; left: -300px; width: 300px; height: 100%;
-            background: white; z-index: 1002;
-            box-shadow: 5px 0 25px rgba(0,0,0,0.05);
-            transition: left 0.4s ease;
-            padding: 40px 30px;
+            top: 0; left: -360px; width: 360px; height: 100%;
+            background: #ffffff; z-index: 2000;
+            box-shadow: 10px 0 50px rgba(0,0,0,0.08);
+            transition: var(--transition);
+            padding: 50px 40px;
         }
         .side-nav.open { left: 0; }
-        .close-nav { font-size: 1.8rem; cursor: pointer; text-align: right; margin-bottom: 35px; }
+        .close-nav { font-size: 2.2rem; cursor: pointer; text-align: right; margin-bottom: 40px; color: var(--gray); transition: color 0.3s; }
+        .close-nav:hover { color: var(--dark); }
+        
+        .nav-title { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 25px; font-weight: 500; }
         .side-nav-links { list-style: none; }
-        .side-nav-links li { margin-bottom: 22px; }
+        .side-nav-links li { margin-bottom: 25px; overflow: hidden; }
         .side-nav-links a {
-            text-decoration: none; color: var(--amama-dark);
-            font-family: 'Montserrat', sans-serif; font-size: 0.85rem;
-            letter-spacing: 2px; text-transform: uppercase;
+            text-decoration: none; color: var(--dark);
+            font-family: 'Montserrat', sans-serif; font-size: 0.95rem;
+            letter-spacing: 2px; text-transform: uppercase; display: block;
+            transition: var(--transition); position: relative;
         }
+        .side-nav-links a::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 0; height: 1px; background: var(--gold); transition: var(--transition); }
+        .side-nav-links a:hover { color: var(--gold); transform: translateX(8px); }
+        .side-nav-links a:hover::after { width: 40px; }
 
         .nav-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.1); z-index: 1001; display: none;
+            background: rgba(0,0,0,0.2); backdrop-filter: blur(4px); z-index: 1999; display: none;
         }
 
-        /* AUTOPLAY HERO SLIDER */
-        .slider-container { max-width: 1200px; margin: 25px auto; padding: 0 20px; }
-        .slider-wrapper { width: 100%; height: 380px; overflow: hidden; position: relative; background-color: var(--soft-bg); }
-        @media(max-width: 768px) { .slider-wrapper { height: 240px; } }
-        .slide-img { width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; opacity: 0; transition: opacity 1s ease-in-out; }
-        .slide-img.active { opacity: 1; }
+        /* BANNER SLIDER */
+        .slider-container { max-width: 1400px; margin: 30px auto; padding: 0 30px; }
+        .slider-wrapper { width: 100%; height: 500px; overflow: hidden; position: relative; border-radius: 4px; box-shadow: var(--premium-shadow); }
+        @media(max-width: 768px) { .slider-wrapper { height: 280px; } }
+        .slide-img { width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; opacity: 0; transform: scale(1.08); transition: opacity 1.2s ease-in-out, transform 1.2s ease-in-out; }
+        .slide-img.active { opacity: 1; transform: scale(1); }
         .slider-title-overlay {
-            position: absolute; bottom: 20px; left: 20px; color: white;
-            font-family: 'Montserrat', sans-serif; letter-spacing: 1.5px; font-size: 0.75rem;
-            text-transform: uppercase; background: rgba(0,0,0,0.4); padding: 6px 14px; z-index: 2;
+            position: absolute; bottom: 40px; left: 40px; color: white;
+            font-family: 'Montserrat', sans-serif; letter-spacing: 3px; font-size: 0.9rem;
+            text-transform: uppercase; background: rgba(15,15,15,0.6); padding: 10px 20px; backdrop-filter: blur(5px); z-index: 2; border-left: 2px solid var(--gold);
         }
 
-        /* PRODUCT EDITORIAL SECTIONS */
-        .section-wrapper { max-width: 1200px; margin: 60px auto; padding: 0 20px; }
-        .section-header { text-align: center; margin-bottom: 35px; }
-        .section-header h2 { font-size: 1.5rem; font-weight: 400; letter-spacing: 4px; text-transform: uppercase; color: var(--amama-dark); }
-        .section-header::after { content: ''; display: block; width: 35px; height: 1px; background-color: var(--gold-accent); margin: 12px auto 0 auto; }
+        /* FILTER RESULT INDICATOR PANEL */
+        .filter-indicator-panel { max-width: 1200px; margin: 40px auto -20px auto; padding: 0 30px; display: none; text-align: center; }
+        .filter-badge { display: inline-flex; align-items: center; gap: 15px; background: var(--gold-light); border: 1px solid var(--gold); padding: 10px 25px; border-radius: 50px; font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
+        .clear-filter { cursor: pointer; font-weight: bold; color: var(--dark); font-size: 1.1rem; }
 
-        .editorial-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-        @media (min-width: 768px) { .editorial-grid { grid-template-columns: repeat(4, 1fr); gap: 30px; } }
+        /* PRODUCT SECTIONS */
+        .section-wrapper { max-width: 1200px; margin: 80px auto; padding: 0 30px; transition: var(--transition); }
+        .section-header { text-align: center; margin-bottom: 45px; }
+        .section-header h2 { font-size: 1.8rem; font-weight: 400; letter-spacing: 5px; text-transform: uppercase; color: var(--dark); }
+        .section-header::after { content: ''; display: block; width: 40px; height: 1px; background-color: var(--gold); margin: 15px auto 0 auto; }
 
-        /* CARD DESIGN */
-        .luxury-card { background: white; display: flex; flex-direction: column; cursor: pointer; }
-        .card-img-holder { position: relative; width: 100%; padding-top: 130%; background-color: var(--soft-bg); overflow: hidden; }
-        .card-img-holder img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-        .luxury-card:hover .card-img-holder img { transform: scale(1.02); }
-        .card-details { padding: 12px 5px; text-align: center; }
-        .card-title { font-size: 0.9rem; font-weight: 400; letter-spacing: 0.5px; color: var(--amama-dark); margin-bottom: 5px; text-transform: capitalize; }
-        .card-price { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--amama-gray); }
+        .editorial-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
+        @media (min-width: 768px) { .editorial-grid { grid-template-columns: repeat(4, 1fr); gap: 35px; } }
+
+        /* ADVANCED PRODUCT CARD DESIGN WITH CINEMATIC HOVER EFFECTS */
+        .luxury-card { background: white; display: flex; flex-direction: column; cursor: pointer; position: relative; }
+        .card-img-holder { position: relative; width: 100%; padding-top: 135%; background-color: var(--gold-light); overflow: hidden; border-radius: 2px; }
+        .card-img-holder img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        
+        .luxury-card:hover .card-img-holder img { transform: scale(1.06) rotate(0.5deg); filter: brightness(0.9); }
+        .luxury-card::after { content: 'VIEW DETAILS'; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%) scale(0.9); opacity: 0; color: white; font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 2px; font-weight: 500; background: rgba(15,15,15,0.7); padding: 8px 16px; backdrop-filter: blur(4px); transition: var(--transition); pointer-events: none; z-index: 3; }
+        .luxury-card:hover::after { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+        .card-details { padding: 18px 5px; text-align: center; }
+        .card-title { font-size: 0.95rem; font-weight: 400; letter-spacing: 0.5px; color: var(--dark); margin-bottom: 6px; text-transform: capitalize; transition: color 0.3s; }
+        .luxury-card:hover .card-title { color: var(--gold); }
+        .card-price { font-family: 'Montserrat', sans-serif; font-size: 0.88rem; color: var(--gray); font-weight: 400; }
 
         .view-all-btn {
-            display: block; width: fit-content; margin: 25px auto 0 auto; background: none; border: none;
-            border-bottom: 1px solid var(--amama-dark); color: var(--amama-dark); padding-bottom: 3px;
-            font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer;
+            display: block; width: fit-content; margin: 35px auto 0 auto; background: none; border: none;
+            border-bottom: 1px solid var(--dark); color: var(--dark); padding-bottom: 4px;
+            font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; transition: var(--transition);
         }
+        .view-all-btn:hover { color: var(--gold); border-color: var(--gold); transform: translateY(-2px); }
 
-        /* SHOTS OF PRODUCTS (VIDEO) */
-        .video-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
-        @media (min-width: 768px) { .video-container { grid-template-columns: repeat(4, 1fr); gap: 25px; } }
-        .video-box { position: relative; width: 100%; padding-top: 170%; background: #000; overflow: hidden; }
+        /* SHOTS SECTION */
+        .video-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        @media (min-width: 768px) { .video-container { grid-template-columns: repeat(4, 1fr); gap: 30px; } }
+        .video-box { position: relative; width: 100%; padding-top: 175%; background: #000; overflow: hidden; border-radius: 4px; box-shadow: var(--premium-shadow); }
         .video-box video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
 
-        /* BRAND STATEMENT */
-        .brand-statement { background-color: var(--soft-bg); text-align: center; padding: 60px 20px; border-top: 1px solid var(--amama-border); border-bottom: 1px solid var(--amama-border); margin-top: 80px; }
-        .brand-statement h3 { font-size: 1.8rem; font-weight: 400; margin-bottom: 15px; letter-spacing: 2px; }
-        .brand-statement p { font-size: 1rem; max-width: 600px; margin: 0 auto 40px auto; color: #444; line-height: 1.7; }
-        
-        .badges-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1000px; margin: 0 auto; }
-        @media(min-width: 768px) { .badges-grid { grid-template-columns: repeat(4, 1fr); } }
-        .badge-item { text-align: center; }
-        .badge-icon { font-size: 1.5rem; color: var(--gold-accent); margin-bottom: 10px; }
-        .badge-title { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; color: var(--amama-dark); }
+        /* DYNAMIC SEPARATE FILTER VIEW BLOCK */
+        .filter-view-section { display: none; max-width: 1200px; margin: 60px auto; padding: 0 30px; animation: fadeInPage 0.6s forwards; }
 
-        /* MULTI IMAGE POPUP OVERLAY SLIDER */
-        .detail-popup { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255, 255, 255, 0.99); z-index: 2000; display: none; overflow-y: auto; padding: 40px 20px; }
-        .detail-content { max-width: 900px; margin: 40px auto; display: grid; grid-template-columns: 1fr; gap: 40px; position: relative; }
-        @media(min-width: 768px) { .detail-content { grid-template-columns: 1fr 1fr; align-items: center; } }
-        .popup-close { position: absolute; top: -20px; right: 10px; font-size: 2rem; cursor: pointer; z-index: 10; }
+        /* POPUP OVERLAY WITH GALLERY SLIDER */
+        .detail-popup { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ffffff; z-index: 3000; display: none; overflow-y: auto; padding: 50px 30px; }
+        .detail-content { max-width: 1000px; margin: 40px auto; display: grid; grid-template-columns: 1fr; gap: 50px; position: relative; }
+        @media(min-width: 768px) { .detail-content { grid-template-columns: 1.1fr 0.9fr; align-items: center; } }
+        .popup-close { position: absolute; top: -30px; right: 10px; font-size: 2.5rem; cursor: pointer; z-index: 10; color: var(--gray); transition: color 0.3s; }
+        .popup-close:hover { color: var(--dark); }
         
         .popup-gallery-wrap { position: relative; width: 100%; }
-        .popup-img-container { width: 100%; padding-top: 120%; position: relative; background-color: var(--soft-bg); overflow: hidden; }
-        .popup-img-container img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: none; }
+        .popup-img-container { width: 100%; padding-top: 125%; position: relative; background-color: var(--gold-light); overflow: hidden; border-radius: 4px; box-shadow: var(--premium-shadow); }
+        .popup-img-container img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: none; transition: opacity 0.5s; }
         .popup-img-container img.active { display: block; }
         
-        .popup-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.7); border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 1rem; cursor: pointer; display: none; }
-        .popup-arrow.prev { left: 10px; }
-        .popup-arrow.next { right: 10px; }
-        .popup-dots { display: flex; justify-content: center; gap: 8px; margin-top: 12px; }
-        .popup-dot { width: 7px; height: 7px; background: #ddd; border-radius: 50%; cursor: pointer; }
-        .popup-dot.active { background: var(--amama-dark); }
+        .popup-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.85); border: none; width: 45px; height: 45px; border-radius: 50%; font-size: 1.1rem; cursor: pointer; display: none; transition: var(--transition); box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .popup-arrow:hover { background: var(--dark); color: white; }
+        .popup-arrow.prev { left: 15px; }
+        .popup-arrow.next { right: 15px; }
+        .popup-dots { display: flex; justify-content: center; gap: 10px; margin-top: 16px; }
+        .popup-dot { width: 8px; height: 8px; background: #e0e0e0; border-radius: 50%; cursor: pointer; transition: background 0.3s; }
+        .popup-dot.active { background: var(--gold); width: 20px; border-radius: 10px; }
 
-        .popup-info-wrap { text-align: left; padding: 0 10px; }
-        .popup-title { font-size: 1.5rem; font-weight: 400; margin-bottom: 12px; }
-        .popup-price { font-family: 'Montserrat', sans-serif; font-size: 1.2rem; color: var(--gold-accent); margin-bottom: 20px; }
-        .popup-desc { font-size: 0.9rem; color: var(--amama-gray); line-height: 1.6; margin-bottom: 25px; }
+        .popup-info-wrap { text-align: left; }
+        .popup-title { font-size: 2rem; font-weight: 400; margin-bottom: 15px; letter-spacing: 1px; color: var(--dark); }
+        .popup-price { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; color: var(--gold); margin-bottom: 25px; font-weight: 500; }
+        .popup-desc { font-size: 0.98rem; color: #555; line-height: 1.8; margin-bottom: 35px; font-family: 'Montserrat', sans-serif; }
         
-        /* ORDER FORM MODULE */
-        .order-form-container { background-color: var(--soft-bg); padding: 20px; border: 1px solid var(--amama-border); margin-top: 15px; display: none; }
-        .order-form-container h4 { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; color: var(--amama-dark); }
-        .form-group { margin-bottom: 12px; }
-        .form-group label { display: block; font-size: 0.75rem; font-family: 'Montserrat', sans-serif; text-transform: uppercase; margin-bottom: 5px; color: var(--amama-gray); }
-        .form-group input, .form-group textarea { width: 100%; padding: 10px; border: 1px solid var(--amama-border); font-size: 0.9rem; outline: none; }
-        .form-group input:focus, .form-group textarea:focus { border-color: var(--amama-dark); }
+        /* MODERN DELUXE WHATSAPP INTEGRATION FORM */
+        .order-form-container { background-color: var(--gold-light); padding: 30px; border: 1px dashed var(--gold); border-radius: 4px; margin-top: 25px; display: none; animation: slideDown 0.4s forwards; }
+        .order-form-container h4 { font-family: 'Montserrat', sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; color: var(--dark); border-bottom: 1px solid var(--gold); padding-bottom: 8px; }
+        .form-group { margin-bottom: 18px; }
+        .form-group label { display: block; font-size: 0.72rem; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; color: var(--gray); font-weight: 500; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid var(--border); font-size: 0.95rem; outline: none; border-radius: 2px; transition: var(--transition); }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); background: #fff; }
         
-        .open-form-btn { display: block; width: 100%; background-color: var(--amama-dark); color: white; text-align: center; padding: 16px; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border: none; }
-        .submit-order-btn { display: block; width: 100%; background-color: var(--whatsapp-green); color: white; text-align: center; padding: 14px; font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; cursor: pointer; border: none; font-weight: 500; }
+        .open-form-btn { display: block; width: 100%; background-color: var(--dark); color: white; text-align: center; padding: 18px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; border: none; transition: var(--transition); }
+        .open-form-btn:hover { background-color: var(--gold); }
+        .submit-order-btn { display: block; width: 100%; background-color: var(--wa-green); color: white; text-align: center; padding: 16px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border: none; font-weight: 500; transition: var(--transition); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3); }
+        .submit-order-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4); }
 
-        /* FOOTER */
-        footer { background-color: #FFFFFF; padding: 60px 25px; border-top: 1px solid var(--amama-border); text-align: center; }
-        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 40px; max-width: 1000px; margin: 0 auto 50px auto; }
+        /* BRAND STATEMENT & FOOTER */
+        .brand-statement { background-color: var(--gold-light); text-align: center; padding: 80px 20px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-top: 100px; }
+        .brand-statement h3 { font-size: 2.2rem; font-weight: 400; margin-bottom: 20px; letter-spacing: 4px; color: var(--gold); }
+        .brand-statement p { font-size: 1.1rem; max-width: 650px; margin: 0 auto 50px auto; color: #333; line-height: 1.8; }
+        
+        .badges-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 1100px; margin: 0 auto; }
+        @media(min-width: 768px) { .badges-grid { grid-template-columns: repeat(4, 1fr); } }
+        .badge-item { text-align: center; transition: transform 0.3s; }
+        .badge-item:hover { transform: translateY(-5px); }
+        .badge-icon { font-size: 1.8rem; color: var(--gold); margin-bottom: 12px; }
+        .badge-title { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--dark); font-weight: 500; }
+
+        .floating-wa-btn {
+            position: fixed; bottom: 35px; right: 35px; background-color: var(--wa-green); color: white;
+            width: 65px; height: 65px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 10px 25px rgba(37,211,102,0.3); z-index: 1500; text-decoration: none; transition: var(--transition);
+        }
+        .floating-wa-btn:hover { transform: scale(1.1) rotate(10deg); }
+        .floating-wa-btn svg { width: 34px; height: 34px; fill: white; }
+
+        footer { background-color: #ffffff; padding: 80px 40px; border-top: 1px solid var(--border); text-align: center; }
+        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 50px; max-width: 1100px; margin: 0 auto 60px auto; }
         @media(min-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; text-align: left; } }
-        .footer-col h4 { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 18px; }
-        .footer-col p, .footer-col a { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: var(--amama-gray); line-height: 1.8; text-decoration: none; display: block; margin-bottom: 8px; }
-        footer .copyright { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; color: #999; letter-spacing: 1px; text-transform: uppercase; margin-top: 30px; }
+        .footer-col h4 { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 22px; color: var(--dark); }
+        .footer-col p, .footer-col a { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--gray); line-height: 2; text-decoration: none; display: block; margin-bottom: 10px; transition: color 0.3s; }
+        .footer-col a:hover { color: var(--gold); }
+        footer .copyright { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; color: #aaa; letter-spacing: 2px; text-transform: uppercase; margin-top: 40px; border-top: 1px solid var(--border); padding-top: 30px; }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -302,50 +310,54 @@
     <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
     <div class="side-nav" id="sideNav">
         <div class="close-nav" onclick="toggleNav()">×</div>
+        <div class="nav-title">Select Category</div>
         <ul class="side-nav-links">
-            <li><a href="#" onclick="toggleNav()">Daily Items</a></li>
-            <li><a href="#topSelling" onclick="toggleNav()">Top Selling</a></li>
-            <li><a href="#viral" onclick="toggleNav()">Viral Products</a></li>
-            <li><a href="#festive" onclick="toggleNav()">Festive Collection</a></li>
-            <li><a href="#cosmetics" onclick="toggleNav()">Best Cosmetics</a></li>
-            <li><a href="#skincare" onclick="toggleNav()">Skin Care</a></li>
+            <li><a href="#" onclick="clearCategoryFilter()">All Collections</a></li>
+            <li><a href="#" onclick="applyCategoryFilter('Handmade product')">Handmade Product</a></li>
+            <li><a href="#" onclick="applyCategoryFilter('Jewellery')">Jewellery</a></li>
+            <li><a href="#" onclick="applyCategoryFilter('Ornaments')">Ornaments</a></li>
+            <li><a href="#" onclick="applyCategoryFilter('Cosmetics')">Cosmetics</a></li>
+            <li><a href="#" onclick="applyCategoryFilter('Skincare')">Skincare</a></li>
+            <li><a href="#" onclick="applyCategoryFilter('Bag & shoes')">Bag & Shoes</a></li>
         </ul>
     </div>
 
-    <div class="slider-container">
+    <div class="slider-container" id="heroSliderArea">
         <div class="slider-wrapper" id="heroSliderContainer">
             <div class="slider-title-overlay" id="sliderText">Chitrangana Edit</div>
         </div>
     </div>
 
-    <div class="section-wrapper" id="topSelling">
-        <div class="section-header"><h2>Top Selling Products</h2></div>
-        <div class="editorial-grid" id="topSellingGrid"></div>
-        <button class="view-all-btn">View All</button>
+    <div class="filter-indicator-panel" id="filterIndicatorPanel">
+        <div class="filter-badge">
+            <span id="activeFilterLabel">Category</span>
+            <span class="clear-filter" onclick="clearCategoryFilter()">×</span>
+        </div>
     </div>
 
-    <div class="section-wrapper" id="viral">
-        <div class="section-header"><h2>Viral Products</h2></div>
-        <div class="editorial-grid" id="viralGrid"></div>
-        <button class="view-all-btn">View All</button>
+    <div class="filter-view-section" id="filterViewSection">
+        <div class="section-header"><h2 id="filterViewTitle">Category Archive</h2></div>
+        <div class="editorial-grid" id="filterViewGrid"></div>
     </div>
 
-    <div class="section-wrapper" id="festive">
-        <div class="section-header"><h2>Festive Collection</h2></div>
-        <div class="editorial-grid" id="festiveGrid"></div>
-        <button class="view-all-btn">View All</button>
-    </div>
+    <div class="main-homepage-dashboard" id="mainHomepageDashboard">
+        <div class="section-wrapper" id="topSelling">
+            <div class="section-header"><h2>Top Selling Products</h2></div>
+            <div class="editorial-grid" id="topSellingGrid"></div>
+            <button class="view-all-btn">View All</button>
+        </div>
 
-    <div class="section-wrapper" id="cosmetics">
-        <div class="section-header"><h2>Best Cosmetics</h2></div>
-        <div class="editorial-grid" id="cosmeticsGrid"></div>
-        <button class="view-all-btn">View All</button>
-    </div>
+        <div class="section-wrapper" id="viral">
+            <div class="section-header"><h2>Viral Products</h2></div>
+            <div class="editorial-grid" id="viralGrid"></div>
+            <button class="view-all-btn">View All</button>
+        </div>
 
-    <div class="section-wrapper" id="skincare">
-        <div class="section-header"><h2>Skin Care</h2></div>
-        <div class="editorial-grid" id="skincareGrid"></div>
-        <button class="view-all-btn">View All</button>
+        <div class="section-wrapper" id="festive">
+            <div class="section-header"><h2>Festive Collection</h2></div>
+            <div class="editorial-grid" id="festiveGrid"></div>
+            <button class="view-all-btn">View All</button>
+        </div>
     </div>
 
     <div class="section-wrapper" id="videoSectionArea" style="display:none;">
@@ -421,6 +433,7 @@
     </footer>
 
     <script>
+        // FIXED SMART ENGINE FOR DIRECT SHEETS EXTENSION
         const SHEET_ID = '1_WVEQnc5SxLeHAZqA78K7xAJ7eFFAWXCkXn8GAkealg'; 
         const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
@@ -432,7 +445,6 @@
         let selectedProductPrice = "";
         let activeSlideIndex = 0;
 
-        // FIXED 2026 DYNAMIC PARSER ENGINE
         async function loadDataFromSheet() {
             try {
                 const response = await fetch(SHEET_URL);
@@ -450,20 +462,19 @@
                 rows.forEach(row => {
                     if(!row.c) return;
                     
-                    // Fixed Index Scanning Map: id(0), title(1), price(2), desc(3), img(4), section(5)
                     const id = row.c[0] ? (row.c[0].v !== null ? row.c[0].v : '') : '';
                     const title = row.c[1] ? (row.c[1].v !== null ? row.c[1].v : '') : '';
                     const price = row.c[2] ? (row.c[2].v !== null ? row.c[2].v : '') : '';
                     const desc = row.c[3] ? (row.c[3].v !== null ? row.c[3].v : '') : '';
                     const rawImgStr = row.c[4] ? (row.c[4].v !== null ? row.c[4].v : '') : '';
-                    const rawSectionStr = row.c[5] ? (row.c[5].v !== null ? row.c[5].v : 'topSelling') : 'topSelling';
+                    const rawSectionStr = row.c[5] ? (row.c[5].v !== null ? row.c[5].v : '') : '';
 
                     const imgArray = String(rawImgStr).split(',').map(link => link.trim()).filter(link => link !== '');
                     const sectionsArray = String(rawSectionStr).split(',').map(s => s.trim()).filter(s => s !== '');
 
-                    if (sectionsArray.includes('heroSlider')) {
+                    if (sectionsArray.some(s => s.toLowerCase() === 'heroslider')) {
                         if(imgArray.length > 0) sliderImages.push({url: imgArray[0], title: desc || title});
-                    } else if (sectionsArray.includes('shortVideo')) {
+                    } else if (sectionsArray.some(s => s.toLowerCase() === 'shortvideo')) {
                         if(imgArray.length > 0) shortVideos.push(imgArray[0]);
                     } else if (title !== '') {
                         allProducts.push({
@@ -488,56 +499,45 @@
         function renderBanners() {
             const container = document.getElementById('heroSliderContainer');
             if (sliderImages.length === 0) {
-                sliderImages.push({url: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1200', title: 'Chitrangana Premium Jewels'});
+                sliderImages.push({url: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=1200', title: 'Chitrangana Elite Statement'});
             }
             container.innerHTML = `<div class="slider-title-overlay" id="sliderText">Chitrangana Edit</div>`;
-            
             sliderImages.forEach((slide, idx) => {
                 const activeClass = idx === 0 ? 'active' : '';
                 container.innerHTML += `<img src="${slide.url}" class="slide-img ${activeClass}" alt="Banner">`;
             });
             activeSlideIndex = 0;
-            if(sliderImages[0]) document.getElementById('sliderText').innerText = sliderImages[0].title || "Chitrangana Edit";
+            if(sliderImages[0]) document.getElementById('sliderText').innerText = sliderImages[0].title;
         }
 
         function renderVideos() {
             const area = document.getElementById('videoSectionArea');
             const grid = document.getElementById('dynamicVideoGrid');
             grid.innerHTML = "";
-            
-            if (shortVideos.length === 0) {
-                area.style.display = "none";
-                return;
-            }
+            if (shortVideos.length === 0) { area.style.display = "none"; return; }
             area.style.display = "block";
             shortVideos.forEach(vidUrl => {
-                grid.innerHTML += `
-                    <div class="video-box">
-                        <video src="${vidUrl}" loop muted autoplay playsinline></video>
-                    </div>
-                `;
+                grid.innerHTML += `<div class="video-box"><video src="${vidUrl}" loop muted autoplay playsinline></video></div>`;
             });
         }
 
         function renderAllGrids(productsArray) {
-            injectGrid('topSellingGrid', productsArray.filter(p => p.sections.includes('topSelling')));
-            injectGrid('viralGrid', productsArray.filter(p => p.sections.includes('viral')));
-            injectGrid('festiveGrid', productsArray.filter(p => p.sections.includes('festive')));
-            injectGrid('cosmeticsGrid', productsArray.filter(p => p.sections.includes('cosmetics')));
-            injectGrid('skincareGrid', productsArray.filter(p => p.sections.includes('skincare')));
+            injectGrid('topSellingGrid', productsArray.filter(p => p.sections.some(s => s.toLowerCase() === 'topselling')));
+            injectGrid('viralGrid', productsArray.filter(p => p.sections.some(s => s.toLowerCase() === 'viral')));
+            injectGrid('festiveGrid', productsArray.filter(p => p.sections.some(s => s.toLowerCase() === 'festive')));
         }
 
-        function injectGrid(gridId, array) {
+        function injectGrid(gridId, array, isArchive = false) {
             const wrapper = document.getElementById(gridId);
             wrapper.innerHTML = "";
             if(array.length === 0) {
-                wrapper.innerHTML = `<p style="grid-column:span 2; color:#aaa; font-size:0.8rem; text-align:center; padding:20px;">No items active.</p>`;
+                wrapper.innerHTML = `<p style="grid-column:span 2; color:#bbb; font-size:0.85rem; text-align:center; padding:40px;">No exquisite items available in this category currently.</p>`;
                 return;
             }
-            array.slice(0, 8).forEach(p => {
+            const limit = isArchive ? array.length : 8;
+            array.slice(0, limit).forEach(p => {
                 const displayImg = p.images.length > 0 ? p.images[0] : 'https://via.placeholder.com/500';
                 const imgStringParam = encodeURIComponent(JSON.stringify(p.images));
-
                 wrapper.innerHTML += `
                     <div class="luxury-card" onclick="openPopup('${p.title.replace(/'/g, "\\'")}', '${p.price}', '${p.desc.replace(/'/g, "\\'")}', '${imgStringParam}')">
                         <div class="card-img-holder"><img src="${displayImg}" alt="${p.title}"></div>
@@ -550,26 +550,56 @@
             });
         }
 
-        // 100% FIXED ACTIVE INSTANT SEARCH OVERLAY MODULE
+        // ADVANCED LOWERCASE FILTER SCANNING (PREVENTS ACCIDENTAL TYPO WRONGS)
+        function applyCategoryFilter(categoryName) {
+            toggleNav();
+            window.scrollTo({ top: 350, behavior: 'smooth' });
+
+            const dashboard = document.getElementById('mainHomepageDashboard');
+            const sliderArea = document.getElementById('heroSliderArea');
+            const filterSection = document.getElementById('filterViewSection');
+            const indicator = document.getElementById('filterIndicatorPanel');
+            
+            const matchedProducts = allProducts.filter(p => p.sections.some(s => s.toLowerCase().trim() === categoryName.toLowerCase().trim()));
+            
+            document.getElementById('filterViewTitle').innerText = categoryName;
+            document.getElementById('activeFilterLabel').innerText = `Category: ${categoryName}`;
+            
+            dashboard.style.display = "none";
+            sliderArea.style.display = "none";
+            filterSection.style.display = "block";
+            indicator.style.display = "block";
+            
+            injectGrid('filterViewGrid', matchedProducts, true);
+        }
+
+        function clearCategoryFilter() {
+            document.getElementById('mainHomepageDashboard').style.display = "block";
+            document.getElementById('heroSliderArea').style.display = "block";
+            document.getElementById('filterViewSection').style.display = "none";
+            document.getElementById('filterIndicatorPanel').style.display = "none";
+            renderAllGrids(allProducts);
+        }
+
         function toggleSearch(show) {
             const overlay = document.getElementById('searchOverlay');
             overlay.style.display = show ? 'flex' : 'none';
-            if(show) {
-                document.getElementById('searchInput').focus();
-            } else {
-                document.getElementById('searchInput').value = '';
-                renderAllGrids(allProducts);
-            }
+            if(show) { document.getElementById('searchInput').focus(); } 
+            else { document.getElementById('searchInput').value = ''; clearCategoryFilter(); }
         }
 
         function executeSearch() {
             const query = document.getElementById('searchInput').value.toLowerCase().trim();
-            if(query === "") {
-                renderAllGrids(allProducts);
-                return;
-            }
+            if(query === "") { clearCategoryFilter(); return; }
+            
             const filtered = allProducts.filter(p => p.title.toLowerCase().includes(query) || p.desc.toLowerCase().includes(query));
-            renderAllGrids(filtered);
+            
+            document.getElementById('mainHomepageDashboard').style.display = "none";
+            document.getElementById('heroSliderArea').style.display = "none";
+            document.getElementById('filterViewSection').style.display = "block";
+            document.getElementById('filterViewTitle').innerText = `Search Results for "${query}"`;
+            
+            injectGrid('filterViewGrid', filtered, true);
         }
 
         function toggleNav() {
@@ -582,14 +612,10 @@
         function runSlider() {
             const slides = document.querySelectorAll('.slide-img');
             if(slides.length <= 1) return;
-            
             slides[activeSlideIndex].classList.remove('active');
             activeSlideIndex = (activeSlideIndex + 1) % slides.length;
             slides[activeSlideIndex].classList.add('active');
-            
-            if(sliderImages[activeSlideIndex]) {
-                document.getElementById('sliderText').innerText = sliderImages[activeSlideIndex].title || "Chitrangana Edit";
-            }
+            if(sliderImages[activeSlideIndex]) document.getElementById('sliderText').innerText = sliderImages[activeSlideIndex].title;
         }
 
         function openPopup(title, price, desc, encodedImages) {
@@ -597,7 +623,6 @@
             document.getElementById('popupPrice').innerText = price;
             document.getElementById('popupDesc').innerText = desc;
             selectedProductPrice = price;
-            
             document.getElementById('custProduct').value = title;
             document.getElementById('orderFormModule').style.display = "none";
             document.getElementById('openFormBtn').style.display = "block";
@@ -607,14 +632,11 @@
             document.getElementById('custLocation').value = "";
 
             currentPopupImages = JSON.parse(decodeURIComponent(encodedImages));
-            if(currentPopupImages.length === 0) {
-                currentPopupImages.push('https://via.placeholder.com/500');
-            }
+            if(currentPopupImages.length === 0) currentPopupImages.push('https://via.placeholder.com/500');
 
             const imgContainer = document.getElementById('popupImgContainer');
             const dotsContainer = document.getElementById('popupDotsContainer');
-            imgContainer.innerHTML = "";
-            dotsContainer.innerHTML = "";
+            imgContainer.innerHTML = ""; dotsContainer.innerHTML = "";
             currentPopupSlideIndex = 0;
 
             currentPopupImages.forEach((imgUrl, index) => {
@@ -624,11 +646,9 @@
                 dotsContainer.innerHTML += `<div ${dotClass} id="popupDot-${index}" onclick="setPopupSlide(${index})"></div>`;
             });
 
-            const arrows = document.querySelectorAll('.popup-arrow');
-            arrows.forEach(arrow => {
+            document.querySelectorAll('.popup-arrow').forEach(arrow => {
                 arrow.style.display = currentPopupImages.length > 1 ? 'block' : 'none';
             });
-
             document.getElementById('productDetailPopup').style.display = "block";
         }
 
@@ -659,7 +679,7 @@
             const location = document.getElementById('custLocation').value.trim();
 
             if(!name || !qty || !location) {
-                alert("অনুগ্রহ করে আপনার নাম, পরিমাণ এবং সম্পূর্ণ ঠিকানা সঠিকভাবে লিখুন।");
+                alert("অনুগ্রহ করে তথ্যগুলো সঠিকভাবে পূর্ণাঙ্গ পূরণ করুন।");
                 return;
             }
 
@@ -667,17 +687,15 @@
                               `👤 *কাস্টমারের নাম:* ${name}\n` +
                               `🛍️ *প্রোডাক্ট:* ${product}\n` +
                               `💰 *মূল্য:* ${selectedProductPrice}\n` +
-                              `📦 *পরিমাণ (Quantity):* ${qty} টি\n` +
-                              `📍 *ঠিকানা ও ফোন নাম্বার:* ${location}\n\n` +
-                              `_অনুগ্রহ করে অর্ডারটি দ্রুত চেক করে কনফার্ম করুন।_`;
+                              `📦 *পরিমাণ:* ${qty} টি\n` +
+                              `📍 *ঠিকানা ও ফোন:* ${location}`;
 
-            const whatsappUrl = `https://api.whatsapp.com/send?phone=8801850341190&text=${encodeURIComponent(waMessage)}`;
-            window.open(whatsappUrl, '_blank');
+            window.open(`https://api.whatsapp.com/send?phone=8801850341190&text=${encodeURIComponent(waMessage)}`, '_blank');
         }
 
         window.onload = function() {
             loadDataFromSheet();
-            setInterval(runSlider, 4000);
+            setInterval(runSlider, 4500);
         };
     </script>
 </body>
