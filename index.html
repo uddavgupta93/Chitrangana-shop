@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chitrangana | Elite Handcrafted Premium Brand</title>
+    <title>Chitrangana | Premium Handcrafted Luxury</title>
     <style>
         :root {
-            --dark: #0f0f0f;
-            --gray: #666666;
-            --light-gray: #f4f4f4;
-            --border: #e5e5e5;
+            --dark: #0a0a0a;
+            --gray: #777777;
+            --light-gray: #f9f9f9;
+            --border: #e0e0e0;
             --bg: #ffffff;
-            --gold: #bfa37a;
-            --gold-light: #fbf9f6;
+            --gold: #c5a880;
+            --gold-dark: #aa8c65;
+            --gold-light: #fdfbf7;
             --wa-green: #25D366;
-            --premium-shadow: 0 30px 60px rgba(0,0,0,0.05);
-            --transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            --premium-shadow: 0 25px 50px rgba(0, 0, 0, 0.04);
+            --transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -27,16 +28,16 @@
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
             opacity: 0;
-            animation: cinematicPageReveal 1.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: cinematicPageReveal 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         @keyframes cinematicPageReveal {
-            from { opacity: 0; transform: scale(1.02); filter: brightness(0.6); }
-            to { opacity: 1; transform: scale(1); filter: brightness(1); }
+            from { opacity: 0; transform: translateY(15px); filter: brightness(0.8); }
+            to { opacity: 1; transform: translateY(0); filter: brightness(1); }
         }
 
-        .top-bar {
-            background: linear-gradient(90deg, #0f0f0f, #262626, #0f0f0f);
+        .top-banner {
+            background: linear-gradient(90deg, #0a0a0a, #222222, #0a0a0a);
             color: #ffffff;
             text-align: center;
             padding: 12px;
@@ -44,28 +45,40 @@
             letter-spacing: 3px;
             text-transform: uppercase;
             font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
         }
 
-        /* DEAD CENTER LOGO NAVIGATION */
+        /* FIXED LUXURY HEADER WITH SHIFTED CONTROLS */
         .main-header {
             position: sticky;
             top: 0;
-            height: 90px;
+            height: 95px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 50px;
-            border-bottom: 1px solid var(--border);
-            background: rgba(255,255,255,0.98);
-            backdrop-filter: blur(20px);
+            padding: 0 60px;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(25px);
             z-index: 1000;
+            transition: var(--transition);
         }
 
         @media(max-width: 768px) {
-            .main-header { padding: 0 20px; height: 80px; }
+            .main-header { padding: 0 25px; height: 85px; }
         }
 
         .header-left { display: flex; align-items: center; z-index: 10; }
+
+        .menu-toggle {
+            font-size: 1.6rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--dark);
+            transition: var(--transition);
+        }
+        .menu-toggle:hover { color: var(--gold); transform: scale(1.05); }
 
         .header-center {
             position: absolute;
@@ -73,45 +86,35 @@
             top: 50%;
             transform: translate(-50%, -50%);
             text-align: center;
-            width: auto;
-            white-space: nowrap;
             z-index: 5;
         }
 
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            font-size: 1.3rem;
-            z-index: 10;
-        }
-
-        .menu-toggle {
-            font-size: 1.8rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: var(--dark);
-            transition: var(--transition);
-        }
-        .menu-toggle:hover { color: var(--gold); transform: scale(1.1); }
-
         .header-center h1 {
-            font-size: 2.1rem;
+            font-size: 2.3rem;
             font-weight: 400;
-            letter-spacing: 4px;
+            letter-spacing: 6px;
             color: var(--dark);
-            transition: var(--transition);
+            text-transform: uppercase;
         }
-        @media(max-width: 768px) { .header-center h1 { font-size: 1.7rem; letter-spacing: 2px; } }
+        @media(max-width: 768px) { .header-center h1 { font-size: 1.6rem; letter-spacing: 3px; } }
 
         .header-center .sub-brand {
             font-family: 'Montserrat', sans-serif;
-            font-size: 0.65rem;
-            letter-spacing: 5px;
+            font-size: 0.6rem;
+            letter-spacing: 6px;
             color: var(--gray);
             text-transform: uppercase;
-            margin-top: 2px;
+            margin-top: 4px;
+        }
+
+        /* POSITIONED FORWARD RIGHT TO PREVENT OVERLAP */
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            font-size: 1.25rem;
+            z-index: 10;
+            margin-left: auto;
         }
 
         .header-icon { cursor: pointer; transition: var(--transition); user-select: none; }
@@ -119,174 +122,203 @@
 
         /* OVERLAY SEARCH SYSTEM */
         .search-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100px;
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: white;
             display: none;
             align-items: center;
             justify-content: space-between;
-            padding: 0 50px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.06);
-            z-index: 1010;
-            animation: slideDownIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            padding: 0 60px;
+            z-index: 15;
+            animation: fadeInFast 0.3s ease-in-out forwards;
         }
-        @keyframes slideDownIn { from { transform: translateY(-100%); } to { transform: translateY(0); } }
+        @keyframes fadeInFast { from { opacity: 0; } to { opacity: 1; } }
 
         .search-overlay input {
             width: 90%; border: none; outline: none;
-            font-family: 'Montserrat', sans-serif; font-size: 1.3rem;
+            font-family: 'Montserrat', sans-serif; font-size: 1.2rem;
             color: var(--dark); background: transparent;
+            letter-spacing: 1px;
         }
-        .close-search { font-size: 2.2rem; cursor: pointer; color: var(--gray); }
+        .close-search { font-size: 2.2rem; cursor: pointer; color: var(--gray); transition: var(--transition); }
+        .close-search:hover { color: var(--dark); }
 
-        /* SIDEBAR DRAWER */
+        /* SIDEBAR DRAWER WITH INTEGRATED ABOUT SECTION */
         .side-nav {
             position: fixed;
-            top: 0; left: -380px; width: 380px; height: 100%;
+            top: 0; left: -400px; width: 400px; height: 100%;
             background: #ffffff; z-index: 2000;
-            box-shadow: 20px 0 60px rgba(0,0,0,0.06);
+            box-shadow: 25px 0 70px rgba(0,0,0,0.05);
             transition: var(--transition);
-            padding: 50px 40px;
+            padding: 60px 45px;
             display: flex;
             flex-direction: column;
             overflow-y: auto;
         }
-        @media(max-width: 400px) { .side-nav { width: 100%; left: -100%; } }
+        @media(max-width: 440px) { .side-nav { width: 100%; left: -100%; } }
         .side-nav.open { left: 0; }
-        .close-nav { font-size: 2.5rem; cursor: pointer; text-align: right; margin-bottom: 30px; color: var(--gray); }
+        .close-nav { font-size: 2.3rem; cursor: pointer; text-align: right; margin-bottom: 30px; color: var(--gray); transition: var(--transition); }
+        .close-nav:hover { color: var(--dark); }
         
-        .nav-title { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; font-weight: 600; }
+        .nav-title { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 25px; font-weight: 600; }
         .side-nav-links { list-style: none; }
-        .side-nav-links li { margin-bottom: 22px; }
+        .side-nav-links li { margin-bottom: 24px; }
         .side-nav-links a {
             text-decoration: none; color: var(--dark);
-            font-family: 'Montserrat', sans-serif; font-size: 0.95rem;
+            font-family: 'Montserrat', sans-serif; font-size: 0.9rem;
             letter-spacing: 2px; text-transform: uppercase; display: block;
             transition: var(--transition);
         }
-        .side-nav-links a:hover { color: var(--gold); transform: translateX(8px); }
+        .side-nav-links a:hover { color: var(--gold); transform: translateX(6px); }
 
-        .sidebar-contact-box { margin-top: auto; padding-top: 30px; border-top: 1px dashed var(--border); }
+        /* FIXED ABOUT DESIGN MODULE AT BOTTOM OF SIDEBAR */
+        .sidebar-about-box { margin-top: auto; padding-top: 40px; border-top: 1px solid var(--border); }
+        .sidebar-about-box h4 { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; color: var(--dark); margin-bottom: 12px; font-weight: 600; }
+        .sidebar-about-box p { font-size: 0.85rem; color: var(--gray); line-height: 1.6; margin-bottom: 20px; font-family: 'Montserrat', sans-serif; font-weight: 300; }
 
         .nav-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.3); backdrop-filter: blur(6px); z-index: 1999; display: none;
+            background: rgba(0,0,0,0.25); backdrop-filter: blur(5px); z-index: 1999; display: none;
         }
 
-        /* HERO BANNER AREA */
+        /* DYNAMIC HERO BANNER AREA (6-7 RECENT IMAGES VISUALIZATION EFFECT) */
         .slider-container { max-width: 1400px; margin: 40px auto; padding: 0 40px; }
         @media(max-width: 768px) { .slider-container { padding: 0 20px; margin: 20px auto; } }
-        .slider-wrapper { width: 100%; height: 550px; overflow: hidden; position: relative; border-radius: 4px; box-shadow: var(--premium-shadow); background: #fbfbfb; }
-        @media(max-width: 768px) { .slider-wrapper { height: 320px; } }
-        .slide-img { width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; opacity: 0; transform: scale(1.06); transition: opacity 1.4s ease-in-out, transform 1.4s ease-in-out; }
+        .slider-wrapper { width: 100%; height: 600px; overflow: hidden; position: relative; border-radius: 6px; box-shadow: var(--premium-shadow); background: #fbfbfb; }
+        @media(max-width: 768px) { .slider-wrapper { height: 360px; } }
+        
+        .slide-img { 
+            width: 100%; height: 100%; object-fit: cover; position: absolute; top:0; left:0; 
+            opacity: 0; transform: scale(1.08) filter(brightness(0.95)); 
+            transition: opacity 1.6s cubic-bezier(0.16, 1, 0.3, 1), transform 1.6s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
         .slide-img.active { opacity: 1; transform: scale(1); }
+        
         .slider-title-overlay {
-            position: absolute; bottom: 40px; left: 40px; color: white;
-            font-family: 'Montserrat', sans-serif; letter-spacing: 3px; font-size: 0.9rem;
-            text-transform: uppercase; background: rgba(15,15,15,0.8); padding: 15px 25px; backdrop-filter: blur(10px); z-index: 2; border-left: 2px solid var(--gold);
+            position: absolute; bottom: 50px; left: 50px; color: white;
+            font-family: 'Montserrat', sans-serif; letter-spacing: 3px; font-size: 0.85rem;
+            text-transform: uppercase; background: rgba(10,10,10,0.85); padding: 18px 28px; backdrop-filter: blur(15px); z-index: 2; border-left: 3px solid var(--gold);
+            animation: fadeInBlur 1s ease forwards;
         }
 
-        /* PRODUCT GRIDS */
-        .section-wrapper { max-width: 1200px; margin: 90px auto; padding: 0 40px; }
-        @media(max-width: 768px) { .section-wrapper { margin: 60px auto; padding: 0 20px; } }
-        .section-header { text-align: center; margin-bottom: 50px; }
-        .section-header h2 { font-size: 1.8rem; font-weight: 400; letter-spacing: 5px; text-transform: uppercase; color: var(--dark); }
-        .section-header::after { content: ''; display: block; width: 35px; height: 1px; background-color: var(--gold); margin: 15px auto 0 auto; }
+        /* HOME CONTENT DYNAMIC DESIGN */
+        .section-wrapper { max-width: 1200px; margin: 100px auto; padding: 0 40px; }
+        @media(max-width: 768px) { .section-wrapper { margin: 70px auto; padding: 0 20px; } }
+        
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2rem; font-weight: 400; letter-spacing: 6px; text-transform: uppercase; color: var(--dark); }
+        .section-header::after { content: ''; display: block; width: 40px; height: 1px; background-color: var(--gold); margin: 18px auto 0 auto; }
 
-        .editorial-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 25px; }
-        @media (min-width: 768px) { .editorial-grid { grid-template-columns: repeat(4, 1fr); gap: 35px; } }
+        /* PRODUCT SECTIONS GRIDS */
+        .editorial-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+        @media (min-width: 768px) { .editorial-grid { grid-template-columns: repeat(4, 1fr); gap: 40px; } }
         @media(max-width: 480px) { .editorial-grid { gap: 15px; } }
 
         .luxury-card { background: white; display: flex; flex-direction: column; cursor: pointer; position: relative; overflow: hidden; }
         .card-img-holder { position: relative; width: 100%; padding-top: 135%; background-color: var(--gold-light); overflow: hidden; border-radius: 4px; }
         .card-img-holder img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
-        .luxury-card:hover .card-img-holder img { transform: scale(1.07); filter: brightness(0.85); }
+        .luxury-card:hover .card-img-holder img { transform: scale(1.05); filter: brightness(0.9); }
         
-        .luxury-card::after { 
-            content: 'DISCOVER ART'; position: absolute; top: 45%; left: 50%; 
-            transform: translate(-50%, -50%) scale(0.95); opacity: 0; color: white; 
-            font-family: 'Montserrat', sans-serif; font-size: 0.65rem; letter-spacing: 3px; 
-            background: rgba(15,15,15,0.95); padding: 12px 20px; backdrop-filter: blur(5px);
-            transition: var(--transition); z-index: 3;
-        }
-        .luxury-card:hover::after { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-
-        .card-details { padding: 15px 5px; text-align: center; }
-        .card-title { font-size: 0.95rem; font-weight: 400; letter-spacing: 0.5px; color: var(--dark); margin-bottom: 6px; text-transform: capitalize; transition: color 0.3s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .card-details { padding: 18px 5px 5px 5px; text-align: center; }
+        .card-title { font-size: 0.95rem; font-weight: 400; letter-spacing: 0.5px; color: var(--dark); margin-bottom: 8px; text-transform: capitalize; transition: color 0.3s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
         .luxury-card:hover .card-title { color: var(--gold); }
-        .card-price { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--gray); }
+        .card-price { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; color: var(--gray); letter-spacing: 0.5px; }
 
-        .view-all-btn {
-            display: block; width: fit-content; margin: 35px auto 0 auto; background: none; border: none;
-            border-bottom: 1px solid var(--dark); color: var(--dark); padding-bottom: 5px;
-            font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase; cursor: pointer; transition: var(--transition);
+        /* SHORTS OF THE PRODUCTS GALLERY */
+        .shorts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        @media(min-width: 768px) { .shorts-grid { grid-template-columns: repeat(4, 1fr); gap: 25px; } }
+        
+        .short-card { position: relative; padding-top: 175%; background: #111; border-radius: 8px; overflow: hidden; box-shadow: var(--premium-shadow); cursor: pointer; }
+        .short-card video, .short-card img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .short-card:hover video, .short-card:hover img { transform: scale(1.04); filter: brightness(0.85); }
+        
+        .short-overlay-title {
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px 20px 20px 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.85)); color: white;
+            font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase;
         }
-        .view-all-btn:hover { color: var(--gold); border-color: var(--gold); transform: translateY(-2px); }
+        .short-play-icon {
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 50px; height: 50px; background: rgba(255,255,255,0.25); border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; backdrop-filter: blur(8px);
+            color: white; font-size: 1.2rem; pointer-events: none; transition: var(--transition);
+        }
+        .short-card:hover .short-play-icon { background: var(--gold); transform: translate(-50%, -50%) scale(1.1); }
 
-        /* ARCHIVE MODULES */
+        /* ARCHIVE MODAL VIEWER FOR FILTERS */
         .filter-view-section { display: none; max-width: 1200px; margin: 80px auto; padding: 0 40px; }
         .filter-indicator-panel { max-width: 1200px; margin: 40px auto -10px auto; padding: 0 40px; display: none; }
         .filter-badge { display: inline-flex; align-items: center; gap: 20px; background: var(--gold-light); border: 1px solid var(--gold); padding: 10px 25px; border-radius: 50px; font-family: 'Montserrat', sans-serif; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1.5px; }
         .clear-filter { cursor: pointer; font-weight: 600; color: var(--dark); }
 
-        /* PRODUCT LIGHTBOX WINDOW */
-        .detail-popup { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ffffff; z-index: 3000; display: none; overflow-y: auto; padding: 60px 40px; }
-        @media(max-width: 768px) { .detail-popup { padding: 40px 20px; } }
-        .detail-content { max-width: 1100px; margin: 40px auto; display: grid; grid-template-columns: 1fr; gap: 50px; position: relative; }
-        @media(min-width: 768px) { .detail-content { grid-template-columns: 1.1fr 0.9fr; align-items: center; } }
-        .popup-close { position: absolute; top: -45px; right: 10px; font-size: 2.5rem; cursor: pointer; color: var(--gray); }
+        /* PRODUCT LIGHTBOX WINDOW WITH PREMIUM STANDARD LINE SPACING GAPS */
+        .detail-popup { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #ffffff; z-index: 3000; display: none; overflow-y: auto; padding: 80px 40px; }
+        @media(max-width: 768px) { .detail-popup { padding: 50px 25px; } }
+        .detail-content { max-width: 1150px; margin: 40px auto; display: grid; grid-template-columns: 1fr; gap: 60px; position: relative; }
+        @media(min-width: 768px) { .detail-content { grid-template-columns: 1.1fr 0.9fr; align-items: flex-start; } }
+        .popup-close { position: absolute; top: -55px; right: 10px; font-size: 2.5rem; cursor: pointer; color: var(--gray); transition: var(--transition); }
+        .popup-close:hover { color: var(--dark); }
         
         .popup-gallery-wrap { position: relative; width: 100%; }
         .popup-img-container { width: 100%; padding-top: 125%; position: relative; background-color: var(--gold-light); overflow: hidden; border-radius: 4px; }
-        .popup-img-container img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: none; opacity: 0; transition: opacity 0.5s ease; }
+        .popup-img-container img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: none; opacity: 0; transition: opacity 0.6s ease; }
         .popup-img-container img.active { display: block; opacity: 1; }
         
-        .popup-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.95); border: none; width: 44px; height: 44px; border-radius: 50%; font-size: 1rem; cursor: pointer; display: none; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .popup-arrow { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.95); border: none; width: 46px; height: 46px; border-radius: 50%; font-size: 1rem; cursor: pointer; display: none; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: var(--transition); }
+        .popup-arrow:hover { background: var(--dark); color: white; }
         .popup-arrow.prev { left: 15px; }
         .popup-arrow.next { right: 15px; }
-        .popup-dots { display: flex; justify-content: center; gap: 8px; margin-top: 15px; }
+        .popup-dots { display: flex; justify-content: center; gap: 8px; margin-top: 18px; }
         .popup-dot { width: 8px; height: 8px; background: #e0e0e0; border-radius: 50%; cursor: pointer; }
-        .popup-dot.active { background: var(--gold); width: 20px; border-radius: 8px; }
+        .popup-dot.active { background: var(--gold); width: 22px; border-radius: 8px; }
 
+        /* LINE INTERSPACING AND ALIGNMENT UPDATES */
+        .popup-info-wrap { padding-top: 10px; }
+        .popup-title { font-size: 2.2rem; font-weight: 400; letter-spacing: 1px; line-height: 1.3; color: var(--dark); margin-bottom: 25px; text-transform: capitalize; }
+        .popup-price { font-family: 'Montserrat', sans-serif; font-size: 1.3rem; color: var(--gold-dark); font-weight: 500; margin-bottom: 30px; letter-spacing: 1px; border-bottom: 1px solid var(--border); padding-bottom: 15px; }
+        .popup-desc { font-size: 1.05rem; color: #333333; line-height: 2.1; margin-bottom: 40px; font-family: 'Playfair Display', serif; }
+        
         /* WHATSAPP ORDER MODULE */
-        .order-form-container { background-color: var(--gold-light); padding: 25px; border: 1px dashed var(--gold); border-radius: 4px; margin-top: 25px; display: none; }
-        .order-form-container h4 { font-family: 'Montserrat', sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px; color: var(--dark); border-bottom: 1px solid var(--gold); padding-bottom: 8px; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; font-size: 0.7rem; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; color: var(--gray); font-weight: 600; }
-        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid var(--border); font-size: 0.95rem; outline: none; border-radius: 3px; }
+        .order-form-container { background-color: var(--gold-light); padding: 30px; border: 1px dashed var(--gold); border-radius: 4px; margin-top: 30px; display: none; }
+        .order-form-container h4 { font-family: 'Montserrat', sans-serif; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 25px; color: var(--dark); border-bottom: 1px solid var(--gold); padding-bottom: 10px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 0.7rem; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; color: var(--gray); font-weight: 600; }
+        .form-group input, .form-group textarea { width: 100%; padding: 14px; border: 1px solid var(--border); font-size: 0.95rem; outline: none; border-radius: 3px; font-family: 'Montserrat', sans-serif; }
+        .form-group input:focus, .form-group textarea:focus { border-color: var(--gold); }
         
-        .open-form-btn { display: block; width: 100%; background-color: var(--dark); color: white; text-align: center; padding: 18px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border: none; transition: var(--transition); border-radius: 3px; }
-        .open-form-btn:hover { background-color: var(--gold); }
-        .submit-order-btn { display: block; width: 100%; background-color: var(--wa-green); color: white; text-align: center; padding: 16px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; border: none; font-weight: 600; border-radius: 3px; }
+        .open-form-btn { display: block; width: 100%; background-color: var(--dark); color: white; text-align: center; padding: 20px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; cursor: pointer; border: none; transition: var(--transition); border-radius: 3px; }
+        .open-form-btn:hover { background-color: var(--gold-dark); }
+        .submit-order-btn { display: block; width: 100%; background-color: var(--wa-green); color: white; text-align: center; padding: 18px; font-family: 'Montserrat', sans-serif; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; cursor: pointer; border: none; font-weight: 600; border-radius: 3px; }
 
-        .brand-statement { background-color: var(--gold-light); text-align: center; padding: 80px 40px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-top: 90px; }
-        .brand-statement h3 { font-size: 2.2rem; font-weight: 400; margin-bottom: 20px; letter-spacing: 5px; color: var(--gold); }
-        .brand-statement p { font-size: 1.15rem; max-width: 650px; margin: 0 auto 50px auto; color: #222; line-height: 1.8; }
+        /* BRAND STATEMENT GRAPHIC BLOCK */
+        .brand-statement { background-color: var(--gold-light); text-align: center; padding: 90px 40px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-top: 100px; }
+        .brand-statement h3 { font-size: 2.4rem; font-weight: 400; margin-bottom: 25px; letter-spacing: 6px; color: var(--gold-dark); text-transform: uppercase; }
+        .brand-statement p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 55px auto; color: #222; line-height: 1.9; }
         
-        .badges-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 1000px; margin: 0 auto; }
+        .badges-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; max-width: 1000px; margin: 0 auto; }
         @media(min-width: 768px) { .badges-grid { grid-template-columns: repeat(4, 1fr); } }
-        .badge-title { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--dark); margin-top: 10px; }
+        .badge-title { font-family: 'Montserrat', sans-serif; font-size: 0.75rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--dark); margin-top: 12px; font-weight: 500; }
 
         .floating-wa-btn {
-            position: fixed; bottom: 35px; right: 35px; background-color: var(--wa-green); color: white;
-            width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 10px 25px rgba(37,211,102,0.3); z-index: 1500; text-decoration: none; transition: var(--transition);
+            position: fixed; bottom: 40px; right: 40px; background-color: var(--wa-green); color: white;
+            width: 62px; height: 62px; border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 12px 30px rgba(37,211,102,0.25); z-index: 1500; text-decoration: none; transition: var(--transition);
         }
-        .floating-wa-btn:hover { transform: scale(1.1); }
-        .floating-wa-btn svg { width: 30px; height: 30px; fill: white; }
+        .floating-wa-btn:hover { transform: scale(1.08); }
+        .floating-wa-btn svg { width: 32px; height: 32px; fill: white; }
 
-        footer { background-color: #ffffff; padding: 70px 40px; border-top: 1px solid var(--border); text-align: center; }
-        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 40px; max-width: 1100px; margin: 0 auto 40px auto; }
+        footer { background-color: #ffffff; padding: 80px 40px 40px 40px; border-top: 1px solid var(--border); text-align: center; }
+        .footer-grid { display: grid; grid-template-columns: 1fr; gap: 50px; max-width: 1100px; margin: 0 auto 50px auto; }
         @media(min-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; text-align: left; } }
-        .footer-col h4 { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 15px; color: var(--dark); font-weight: 600; }
-        .footer-col p, .footer-col a { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--gray); line-height: 2; text-decoration: none; display: block; }
-        footer .copyright { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; color: #999; letter-spacing: 2px; text-transform: uppercase; margin-top: 5px; border-top: 1px solid var(--border); padding-top: 30px; }
+        .footer-col h4 { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; color: var(--dark); font-weight: 600; }
+        .footer-col p, .footer-col a { font-family: 'Montserrat', sans-serif; font-size: 0.85rem; color: var(--gray); line-height: 2.2; text-decoration: none; display: block; }
+        footer .copyright { font-family: 'Montserrat', sans-serif; font-size: 0.7rem; color: #aaaaaa; letter-spacing: 2px; text-transform: uppercase; border-top: 1px solid var(--border); padding-top: 40px; }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="top-bar">The Curated Statement Edit • Premium Handcrafted Identity</div>
+    <div class="top-banner">The Curated Statement Edit • Premium Handcrafted Identity</div>
     
     <a href="https://wa.me/8801850341190" target="_blank" class="floating-wa-btn">
         <svg viewBox="0 0 32 32"><path d="M16 2a13.93 13.93 0 0 0-13.93 13.93c0 2.43.62 4.8 1.8 6.93L2 29.8l7.15-1.87a13.84 13.84 0 0 0 6.85 1.8A13.93 13.93 0 0 0 30 15.93 13.93 13.93 0 0 0 16 2zm0 25.54a11.53 11.53 0 0 1-5.87-1.6l-.42-.25-4.37 1.14 1.17-4.25-.28-.45a11.57 11.57 0 0 1-1.77-6.18A11.55 11.55 0 0 1 16 4.46a11.55 11.55 0 0 1 11.54 11.54A11.57 11.57 0 0 1 16 27.54zm6.33-8.66c-.35-.17-2.05-1-2.37-1.12-.31-.11-.54-.17-.77.17s-.88 1.11-1.08 1.34-.4.25-.75.08a9.43 9.43 0 0 1-2.77-1.71 10.41 10.41 0 0 1-1.92-2.39c-.2-.34-.02-.52.15-.7s.35-.4.52-.6c.17-.17.23-.3.35-.5s.06-.37-.03-.54c-.09-.18-.77-1.86-1.06-2.55-.28-.68-.56-.59-.77-.6h-.65a1.27 1.27 0 0 0-.92.43 3.87 3.87 0 0 0-1.21 2.87 6.73 6.73 0 0 0 1.4 3.57 15.42 15.42 0 0 0 5.89 5.2c1.4.6 2.48.96 3.33 1.23a8 8 0 0 0 3.66.23c1.11-.16 2.43-.99 2.77-1.95s.34-1.79.23-1.96-.41-.29-.76-.46z"/></svg>
@@ -297,17 +329,16 @@
             <button class="menu-toggle" onclick="toggleNav()">☰</button>
         </div>
         <div class="header-center">
-            <h1>চিত্রাঙ্গনা</h1>
-            <div class="sub-brand">Chitrangana</div>
+            <h1>Chitrangana</h1>
+            <div class="sub-brand">Handcrafted Luxury</div>
         </div>
         <div class="header-right">
             <span class="header-icon" onclick="toggleSearch(true)">🔍</span>
-            <span class="header-icon" onclick="alert('প্রিয় পণ্যটি উইশলিস্টে যুক্ত হয়েছে!')">♡</span>
-            <span class="header-icon" onclick="alert('ব্যাগ খালি আছে!')">👜</span>
+            <span class="header-icon" onclick="alert('Added to your curated wishlist!')">♡</span>
         </div>
         
         <div class="search-overlay" id="searchOverlay">
-            <input type="text" id="searchInput" placeholder="প্রোডাক্টের নাম দিয়ে খুঁজুন..." oninput="executeSearch()">
+            <input type="text" id="searchInput" placeholder="Search our premium collection..." oninput="executeSearch()">
             <span class="close-search" onclick="toggleSearch(false)">×</span>
         </div>
     </div>
@@ -315,29 +346,27 @@
     <div class="nav-overlay" id="navOverlay" onclick="toggleNav()"></div>
     <div class="side-nav" id="sideNav">
         <div class="close-nav" onclick="toggleNav()">×</div>
-        <div class="nav-title">Select Category</div>
+        <div class="nav-title">Collections</div>
         <ul class="side-nav-links">
-            <li><a href="#" onclick="clearCategoryFilter()">All Collections</a></li>
-            <li><a href="#" onclick="applyCategoryFilter('Cosmetics')">Cosmetics</a></li>
-            <li><a href="#" onclick="applyCategoryFilter('Jewellery')">Jewellery</a></li>
-            <li><a href="#" onclick="applyCategoryFilter('Handmade product')">Handmade Product</a></li>
-            <li><a href="#" onclick="applyCategoryFilter('Ornaments')">Ornaments</a></li>
-            <li><a href="#" onclick="applyCategoryFilter('Skincare')">Skincare</a></li>
-            <li><a href="#" onclick="applyCategoryFilter('Bag & shoes')">Bag & Shoes</a></li>
+            <li><a href="#" onclick="clearCategoryFilter()">Show All Sections</a></li>
+            <li><a href="#" onclick="applyCategoryFilter('cosmetics')">Premium Cosmetics</a></li>
+            <li><a href="#" onclick="applyCategoryFilter('jewellery')">Elite Jewellery</a></li>
+            <li><a href="#" onclick="applyCategoryFilter('handmade')">Handmade Products</a></li>
         </ul>
         
-        <div class="sidebar-contact-box">
-            <div class="nav-title">Contact Channels</div>
+        <div class="sidebar-about-box">
+            <h4>About Chitrangana</h4>
+            <p>Your trusted premium brand for beautiful handcrafted jewelry, elite ornaments, and curated cosmetic sets designed to make every occasion memorable.</p>
             <ul class="side-nav-links">
-                <li><a href="https://www.facebook.com/share/1CBVy5vRrD/" target="_blank" style="font-size:0.85rem; text-transform:none; color:var(--gray);">Facebook Page ➔</a></li>
-                <li><a href="https://wa.me/8801850341190" target="_blank" style="font-size:0.85rem; text-transform:none; color:var(--gray);">WhatsApp Live Chat ➔</a></li>
+                <li><a href="https://www.facebook.com/share/1CBVy5vRrD/" target="_blank" style="font-size:0.8rem; text-transform:none; color:var(--gold-dark);">Official Facebook Page ➔</a></li>
+                <li><a href="https://wa.me/8801850341190" target="_blank" style="font-size:0.8rem; text-transform:none; color:var(--gold-dark);">WhatsApp Support Channel ➔</a></li>
             </ul>
         </div>
     </div>
 
     <div class="slider-container" id="heroSliderArea">
         <div class="slider-wrapper" id="heroSliderContainer">
-            <div class="slider-title-overlay" id="sliderText">Chitrangana Luxury Edit</div>
+            <div class="slider-title-overlay" id="sliderText">Chitrangana Luxury Archive</div>
         </div>
     </div>
 
@@ -349,25 +378,42 @@
     </div>
 
     <div class="filter-view-section" id="filterViewSection">
-        <div class="section-header"><h2 id="filterViewTitle">Category</h2></div>
+        <div class="section-header"><h2 id="filterViewTitle">Category View</h2></div>
         <div class="editorial-grid" id="filterViewGrid"></div>
     </div>
 
     <div class="main-homepage-dashboard" id="mainHomepageDashboard">
-        <div class="section-wrapper" id="allProductsSection">
-            <div class="section-header"><h2>Our Curated Collection</h2></div>
-            <div class="editorial-grid" id="mainProductsGrid"></div>
+        
+        <div class="section-wrapper" id="cosmeticsSection">
+            <div class="section-header"><h2>Premium Cosmetics</h2></div>
+            <div class="editorial-grid" id="cosmeticsGrid"></div>
         </div>
+
+        <div class="section-wrapper" id="jewellerySection">
+            <div class="section-header"><h2>Elite Jewellery</h2></div>
+            <div class="editorial-grid" id="jewelleryGrid"></div>
+        </div>
+
+        <div class="section-wrapper" id="handmadeSection">
+            <div class="section-header"><h2>Handmade Masterpieces</h2></div>
+            <div class="editorial-grid" id="handmadeGrid"></div>
+        </div>
+
+        <div class="section-wrapper" id="shortsSection">
+            <div class="section-header"><h2>Shorts of the Products</h2></div>
+            <div class="shorts-grid" id="shortsGrid"></div>
+        </div>
+        
     </div>
 
     <div class="brand-statement">
-        <h3>...চিত্রাঙ্গনা...</h3>
-        <p>“আপনার উৎসব ও অনুষ্ঠানের পরিপূর্ণ সাজের বিশ্বস্ত নাম — চিত্রাঙ্গনা।”</p>
+        <h3>Chitrangana Design House</h3>
+        <p>"Elevating your traditional style with premium curation, exceptional handcrafting, and customized packaging."</p>
         <div class="badges-grid">
-            <div class="badge-item"><div>📦</div><div class="badge-title">Premium Packaging</div></div>
-            <div class="badge-item"><div>✨</div><div class="badge-title">150+ Happy Customers</div></div>
-            <div class="badge-item"><div>🇧🇩</div><div class="badge-title">Handcrafted In BD</div></div>
-            <div class="badge-item"><div>💬</div><div class="badge-title">WhatsApp To Order</div></div>
+            <div class="badge-item"><div>📦</div><div class="badge-title">Premium Pack</div></div>
+            <div class="badge-item"><div>✨</div><div class="badge-title">150+ Royal Clients</div></div>
+            <div class="badge-item"><div>💎</div><div class="badge-title">Pure Artisanship</div></div>
+            <div class="badge-item"><div>💬</div><div class="badge-title">Instant Order Assist</div></div>
         </div>
     </div>
 
@@ -381,31 +427,31 @@
                 <div class="popup-dots" id="popupDotsContainer"></div>
             </div>
             <div class="popup-info-wrap">
-                <h2 class="popup-title" id="popupTitle">Product Title</h2>
-                <div class="popup-price" id="popupPrice">00 BDT</div>
-                <p class="popup-desc" id="popupDesc">Product description loading system.</p>
+                <h2 class="popup-title" id="popupTitle">Luxury Selection</h2>
+                <div class="popup-price" id="popupPrice">0.00 BDT</div>
+                <p class="popup-desc" id="popupDesc">Detailed product parameters statement text goes here.</p>
                 
-                <button class="open-form-btn" id="openFormBtn" onclick="showOrderForm()">Order via WhatsApp</button>
+                <button class="open-form-btn" id="openFormBtn" onclick="showOrderForm()">Purchase via WhatsApp</button>
                 
                 <div class="order-form-container" id="orderFormModule">
-                    <h4>Delivery Form</h4>
+                    <h4>Secure Delivery Routing</h4>
                     <div class="form-group">
                         <label>Your Name *</label>
-                        <input type="text" id="custName" placeholder="আপনার নাম লিখুন" required>
+                        <input type="text" id="custName" placeholder="Enter your full name" required>
                     </div>
                     <div class="form-group">
-                        <label>Product Name</label>
+                        <label>Selected Product</label>
                         <input type="text" id="custProduct" readonly>
                     </div>
                     <div class="form-group">
-                        <label>Quantity *</label>
+                        <label>Quantity Required *</label>
                         <input type="number" id="custQty" value="1" min="1" required>
                     </div>
                     <div class="form-group">
-                        <label>Delivery Location & Phone *</label>
-                        <textarea id="custLocation" rows="2" placeholder="পূর্ণাঙ্গ ঠিকানা ও ফোন নাম্বার লিখুন" required></textarea>
+                        <label>Full Address & Contact Number *</label>
+                        <textarea id="custLocation" rows="3" placeholder="Provide complete delivery address and phone number" required></textarea>
                     </div>
-                    <button class="submit-order-btn" onclick="sendOrderToWhatsApp()">Confirm Order via WhatsApp ➔</button>
+                    <button class="submit-order-btn" onclick="sendOrderToWhatsApp()">Confirm Order to WhatsApp ➔</button>
                 </div>
             </div>
         </div>
@@ -414,20 +460,19 @@
     <footer>
         <div class="footer-grid">
             <div class="footer-col">
-                <h4>Contact Info</h4>
-                <p>WhatsApp: +880 1850341190</p>
-                <p>Contact Hot Line: +880 1850341190</p>
+                <h4>Contact Interface</h4>
+                <p>WhatsApp Line: +880 1850341190</p>
+                <p>Support Hotline: +880 1850341190</p>
             </div>
             <div class="footer-col">
-                <h4>Follow For Information</h4>
-                <a href="https://www.facebook.com/share/1CBVy5vRrD/" target="_blank">Visit চিত্রাঙ্গনা - Chitrangana Page</a>
+                <h4>Digital Portals</h4>
+                <a href="https://www.facebook.com/share/1CBVy5vRrD/" target="_blank">Connect on Facebook Page</a>
             </div>
         </div>
-        <div class="copyright">© 2026 CHITRANGANA ARCHIVE. SYSTEM POWERED SECURELY.</div>
+        <div class="copyright">© 2026 Chitrangana Premium Label. All Rights Reserved.</div>
     </footer>
 
     <script>
-        // GOOGLE SHEET LINK DIRECTLY SYNCED
         const SHEET_ID = '1_WVEQnc5SxLeHAZqA78K7xAJ7eFFAWXCkXn8GAkealg'; 
         const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
@@ -450,23 +495,27 @@
             return url;
         }
 
-        // PERFECT DEMO FOR VISUAL SATISFACTION
+        // FULL DEMO EXPERIENCE POPULATING INJECTED RICH INITIAL STATES
         function injectDemoExperience() {
-            console.log("Sheet empty or loading fallback mode active.");
+            console.log("Entering structured luxury fallback dashboard configuration.");
             
             sliderImages = [
-                {url: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=1400', title: 'চিত্রাঙ্গনা এক্সক্লুসিভ কালেকশন ২০২৬'},
-                {url: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=1400', title: 'হ্যান্ডমেড রাজকীয় গহনা শিল্প'}
+                {url: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=1400', title: 'Chitrangana Exclusive Collection 2026'},
+                {url: 'https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=1400', title: 'Royal Handcrafted Jewellery Artifacts Edit'},
+                {url: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=1400', title: 'Luxury Skincare Custom Curation'}
             ];
             renderBanners();
 
             allProducts = [
-                { id: '1', title: 'Cosmetics Premium Pack 1', price: 'Demo - 450 BDT', desc: 'Apnar upload kora prothom chobir jaiga. Category: Cosmetics.', images: ['https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600'], sections: ['cosmetics'] },
-                { id: '2', title: 'Cosmetics Premium Pack 2', price: 'Demo - 580 BDT', desc: 'Apnar upload kora ditiyo chobir jaiga. Category: Cosmetics.', images: ['https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600'], sections: ['cosmetics'] },
-                { id: '3', title: 'Jewellery Premium Art 1', price: 'Demo - 1250 BDT', desc: 'Apnar upload kora tritiyo chobir jaiga. Category: Jewellery.', images: ['https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600'], sections: ['jewellery'] },
-                { id: '4', title: 'Jewellery Premium Art 2', price: 'Demo - 1850 BDT', desc: 'Apnar upload kora choturtho chobir jaiga. Category: Jewellery.', images: ['https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600'], sections: ['jewellery'] }
+                { id: '1', title: 'Luxury Matte Lipstick Pack', price: '450 BDT', desc: 'Premium luxury matte lip kit. Long-lasting nourishment with smooth texture profiles.', images: ['https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600'], sections: ['cosmetics'] },
+                { id: '2', title: 'Velvet Skin Foundation Palette', price: '720 BDT', desc: 'Flawless corrective skin solution for high-profile organic premium requirements.', images: ['https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600'], sections: ['cosmetics'] },
+                { id: '3', title: 'Handcrafted Kundan Necklace Set', price: '1850 BDT', desc: 'Masterpiece gold-plated craftsmanship setting featuring authentic traditional stonework patterns.', images: ['https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600'], sections: ['jewellery'] },
+                { id: '4', title: 'Artisanal Emerald Droplet Earrings', price: '1250 BDT', desc: 'Meticulously crafted heritage collection set with deep premium green emerald composite drops.', images: ['https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600'], sections: ['jewellery'] },
+                { id: '5', title: 'Premium Clay Molded Ear Pendant', price: '380 BDT', desc: '100% polymer clay premium organic eco-friendly structural handcrafted design jewelry art.', images: ['https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?w=600'], sections: ['handmade'] },
+                { id: '6', title: 'Chitrangana Luxury Short Highlight 01', price: 'Video Feature', desc: 'Video curation display parameters.', images: ['https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=600'], sections: ['shorts'] },
+                { id: '7', title: 'Chitrangana Luxury Short Highlight 02', price: 'Video Feature', desc: 'Video curation display parameters.', images: ['https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600'], sections: ['shorts'] }
             ];
-            injectGrid('mainProductsGrid', allProducts);
+            dispatchAllGrids();
         }
 
         async function loadDataFromSheet() {
@@ -496,8 +545,7 @@
                     const rawImgStr = row.c[4] ? (row.c[4].v !== null ? row.c[4].v : '') : '';
                     const rawSectionStr = row.c[5] ? (row.c[5].v !== null ? row.c[5].v : '') : '';
 
-                    // Header line auto-protection skip layer
-                    if (idx === 0 && (String(title).toLowerCase().includes('name') || String(title).toLowerCase().includes('title') || String(id).toLowerCase().includes('id'))) return;
+                    if (idx === 0 && (String(title).toLowerCase().includes('title') || String(id).toLowerCase().includes('id'))) return;
 
                     const imgArray = String(rawImgStr).split(',').map(l => l.trim()).filter(l => l !== '').map(l => cleanImageUrl(l));
                     const sectionsArray = String(rawSectionStr).split(',').map(s => s.trim().toLowerCase()).filter(s => s !== '');
@@ -510,7 +558,7 @@
                 });
 
                 if(allProducts.length === 0 && sliderImages.length === 0) { injectDemoExperience(); } 
-                else { renderBanners(); injectGrid('mainProductsGrid', allProducts); }
+                else { renderBanners(); dispatchAllGrids(); }
             } catch (error) {
                 injectDemoExperience();
             }
@@ -519,22 +567,29 @@
         function renderBanners() {
             const container = document.getElementById('heroSliderContainer');
             if (sliderImages.length === 0) {
-                sliderImages.push({url: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=1400', title: 'Chitrangana Handcrafted Luxury'});
+                sliderImages.push({url: 'https://images.unsplash.com/photo-1573408301185-9146fe634ad0?w=1400', title: 'Chitrangana Pure Premium Curation'});
             }
             container.innerHTML = `<div class="slider-title-overlay" id="sliderText">Chitrangana Edit</div>`;
             sliderImages.forEach((slide, idx) => {
                 const activeClass = idx === 0 ? 'active' : '';
-                container.innerHTML += `<img src="${slide.url}" class="slide-img ${activeClass}" alt="Banner Canvas">`;
+                container.innerHTML += `<img src="${slide.url}" class="slide-img ${activeClass}" alt="Cinematic Frame">`;
             });
             activeSlideIndex = 0;
             if(sliderImages[0]) document.getElementById('sliderText').innerText = sliderImages[0].title;
         }
 
-        function injectGrid(gridId, array) {
+        function dispatchAllGrids() {
+            injectStandardGrid('cosmeticsGrid', allProducts.filter(p => p.sections.includes('cosmetics')));
+            injectStandardGrid('jewelleryGrid', allProducts.filter(p => p.sections.includes('jewellery')));
+            injectStandardGrid('handmadeGrid', allProducts.filter(p => p.sections.includes('handmade')));
+            injectShortsGrid('shortsGrid', allProducts.filter(p => p.sections.includes('shorts')));
+        }
+
+        function injectStandardGrid(gridId, array) {
             const wrapper = document.getElementById(gridId);
             wrapper.innerHTML = "";
             if(array.length === 0) {
-                wrapper.innerHTML = `<p style="grid-column:span 2; color:#666; font-family:'Montserrat'; font-size:0.85rem; text-align:center; padding:40px 0;">No luxury items loaded in this category archive yet.</p>`;
+                wrapper.innerHTML = `<p style="grid-column:span 4; color:#999; font-family:'Montserrat'; font-size:0.8rem; text-align:center; padding:30px 0;">Items coming soon to this collection slot.</p>`;
                 return;
             }
             array.forEach((p) => {
@@ -552,6 +607,26 @@
             });
         }
 
+        function injectShortsGrid(gridId, array) {
+            const wrapper = document.getElementById(gridId);
+            wrapper.innerHTML = "";
+            if(array.length === 0) {
+                wrapper.innerHTML = `<p style="grid-column:span 4; color:#999; font-family:'Montserrat'; font-size:0.8rem; text-align:center; padding:30px 0;">Short reels loading soon.</p>`;
+                return;
+            }
+            array.forEach((p) => {
+                const displayImg = p.images.length > 0 ? p.images[0] : 'https://via.placeholder.com/600';
+                const imgStringParam = encodeURIComponent(JSON.stringify(p.images));
+                wrapper.innerHTML += `
+                    <div class="short-card" onclick="openPopup('${p.title.replace(/'/g, "\\'")}', '${p.price}', '${p.desc.replace(/'/g, "\\'")}', '${imgStringParam}')">
+                        <img src="${displayImg}" alt="Product Clip">
+                        <div class="short-play-icon">▶</div>
+                        <div class="short-overlay-title">${p.title}</div>
+                    </div>
+                `;
+            });
+        }
+
         function applyCategoryFilter(categoryName) {
             toggleNav();
             window.scrollTo({ top: 350, behavior: 'smooth' });
@@ -563,15 +638,19 @@
             
             const matchedProducts = allProducts.filter(p => p.sections.includes(categoryName.toLowerCase().trim()));
             
-            document.getElementById('filterViewTitle').innerText = categoryName;
-            document.getElementById('activeFilterLabel').innerText = `Collection : ${categoryName}`;
+            document.getElementById('filterViewTitle').innerText = categoryName + " Edition";
+            document.getElementById('activeFilterLabel').innerText = `Archive Selection : ${categoryName}`;
             
             dashboard.style.display = "none";
             sliderArea.style.display = "none";
             filterSection.style.display = "block";
             indicator.style.display = "block";
             
-            injectGrid('filterViewGrid', matchedProducts);
+            if(categoryName.toLowerCase() === 'shorts') {
+                injectShortsGrid('filterViewGrid', matchedProducts);
+            } else {
+                injectStandardGrid('filterViewGrid', matchedProducts);
+            }
         }
 
         function clearCategoryFilter() {
@@ -579,7 +658,7 @@
             document.getElementById('heroSliderArea').style.display = "block";
             document.getElementById('filterViewSection').style.display = "none";
             document.getElementById('filterIndicatorPanel').style.display = "none";
-            injectGrid('mainProductsGrid', allProducts);
+            dispatchAllGrids();
         }
 
         function toggleSearch(show) {
@@ -596,8 +675,8 @@
             document.getElementById('mainHomepageDashboard').style.display = "none";
             document.getElementById('heroSliderArea').style.display = "none";
             document.getElementById('filterViewSection').style.display = "block";
-            document.getElementById('filterViewTitle').innerText = `Search Results For "${query}"`;
-            injectGrid('filterViewGrid', filtered);
+            document.getElementById('filterViewTitle').innerText = `Search Output for "${query}"`;
+            injectStandardGrid('filterViewGrid', filtered);
         }
 
         function toggleNav() {
@@ -637,7 +716,7 @@
 
             currentPopupImages.forEach((imgUrl, index) => {
                 const imgClass = index === 0 ? 'class="active"' : '';
-                imgContainer.innerHTML += `<img src="${imgUrl}" ${imgClass} id="popupSlide-${index}" alt="Piece Frame">`;
+                imgContainer.innerHTML += `<img src="${imgUrl}" ${imgClass} id="popupSlide-${index}" alt="Piece Matrix">`;
                 const dotClass = index === 0 ? 'class="popup-dot active"' : 'class="popup-dot"';
                 dotsContainer.innerHTML += `<div ${dotClass} id="popupDot-${index}" onclick="setPopupSlide(${index})"></div>`;
             });
@@ -671,21 +750,21 @@
             const qty = document.getElementById('custQty').value.trim();
             const location = document.getElementById('custLocation').value.trim();
 
-            if(!name || !qty || !location) { alert("অনুগ্রহ করে সব তথ্য পূরণ করুন।"); return; }
+            if(!name || !qty || !location) { alert("Please complete all necessary input vectors."); return; }
 
-            const waMessage = `*✨ নতুন অর্ডার কনফার্মেশন - চিত্রাঙ্গনা ✨*\n\n` +
-                              `👤 *কাস্টমারের নাম:* ${name}\n` +
-                              `🛍️ *প্রোডাক্ট:* ${product}\n` +
-                              `💰 *মূল্য:* ${selectedProductPrice}\n` +
-                              `📦 *পরিমাণ:* ${qty} টি\n` +
-                              `📍 *ঠিকানা ও ফোন:* ${location}`;
+            const waMessage = `*✨ New Premium Order Confirmation ✨*\n\n` +
+                              `👤 *Client Identity:* ${name}\n` +
+                              `🛍️ *Curated Selection:* ${product}\n` +
+                              `💰 *Value Reference:* ${selectedProductPrice}\n` +
+                              `📦 *Quantity Order:* ${qty} Unit(s)\n` +
+                              `📍 *Routing Coordinate / Contact:* ${location}`;
 
             window.open(`https://api.whatsapp.com/send?phone=8801850341190&text=${encodeURIComponent(waMessage)}`, '_blank');
         }
 
         window.onload = function() {
             loadDataFromSheet();
-            setInterval(runSlider, 4500);
+            setInterval(runSlider, 4000);
         };
     </script>
 </body>
